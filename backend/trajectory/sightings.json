@@ -1,0 +1,1424 @@
+[
+  {
+    "plate_text": "MP20AB1234",
+    "camera_id": "CAM_04",
+    "timestamp": "2026-08-26T10:00:00Z",
+    "confidence": 0.95,
+    "vehicle_type": "car",
+    "model": "Swift",
+    "color": "Silver"
+  },
+  {
+    "plate_text": "MP04VJ5526",
+    "camera_id": "CAM_09",
+    "timestamp": "2026-08-26T10:01:33Z",
+    "confidence": 0.97,
+    "vehicle_type": "car",
+    "model": "i20",
+    "color": "Black"
+  },
+  {
+    "plate_text": "MP09KJ5847",
+    "camera_id": "CAM_05",
+    "timestamp": "2026-08-26T10:02:53Z",
+    "confidence": 0.87,
+    "vehicle_type": "bike",
+    "model": "Activa",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "DL01KZ9785",
+    "camera_id": "CAM_06",
+    "timestamp": "2026-08-26T10:03:07Z",
+    "confidence": 0.95,
+    "vehicle_type": "bike",
+    "model": "Activa",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP09UP7209",
+    "camera_id": "CAM_06",
+    "timestamp": "2026-08-26T10:03:31Z",
+    "confidence": 0.94,
+    "vehicle_type": "truck",
+    "model": "Ashok Leyland 2820",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP20CB5678",
+    "camera_id": "CAM_01",
+    "timestamp": "2026-08-26T10:05:00Z",
+    "confidence": 0.93,
+    "vehicle_type": "bike",
+    "model": "Pulsar",
+    "color": "Black"
+  },
+  {
+    "plate_text": "MP20EF9012",
+    "camera_id": "CAM_06",
+    "timestamp": "2026-08-26T10:05:00Z",
+    "confidence": 0.97,
+    "vehicle_type": "bus",
+    "model": "Volvo 9400",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP09HS3073",
+    "camera_id": "CAM_05",
+    "timestamp": "2026-08-26T10:05:03Z",
+    "confidence": 0.84,
+    "vehicle_type": "truck",
+    "model": "Eicher Pro",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "DL01YZ5415",
+    "camera_id": "CAM_10",
+    "timestamp": "2026-08-26T10:05:48Z",
+    "confidence": 0.91,
+    "vehicle_type": "bus",
+    "model": "Ashok Leyland Viking",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP20CL8564",
+    "camera_id": "CAM_03",
+    "timestamp": "2026-08-26T10:06:16Z",
+    "confidence": 0.78,
+    "vehicle_type": "truck",
+    "model": "Ashok Leyland 2820",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP20BM9701",
+    "camera_id": "CAM_03",
+    "timestamp": "2026-08-26T10:07:32Z",
+    "confidence": 0.68,
+    "vehicle_type": "truck",
+    "model": "Tata Prima",
+    "color": "White"
+  },
+  {
+    "plate_text": "MP04RD3847",
+    "camera_id": "CAM_09",
+    "timestamp": "2026-08-26T10:09:10Z",
+    "confidence": 0.65,
+    "vehicle_type": "bus",
+    "model": "Ashok Leyland Viking",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MH12GF5632",
+    "camera_id": "CAM_08",
+    "timestamp": "2026-08-26T10:09:43Z",
+    "confidence": 0.73,
+    "vehicle_type": "bike",
+    "model": "Splendor",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP20AB1234",
+    "camera_id": "CAM_03",
+    "timestamp": "2026-08-26T10:10:00Z",
+    "confidence": 0.92,
+    "vehicle_type": "car",
+    "model": "Swift",
+    "color": "Silver"
+  },
+  {
+    "plate_text": "MP20GH3456",
+    "camera_id": "CAM_05",
+    "timestamp": "2026-08-26T10:10:00Z",
+    "confidence": 0.92,
+    "vehicle_type": "truck",
+    "model": "Tata Prima",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MH12XE8141",
+    "camera_id": "CAM_08",
+    "timestamp": "2026-08-26T10:11:30Z",
+    "confidence": 0.77,
+    "vehicle_type": "bike",
+    "model": "Pulsar",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP04JD8770",
+    "camera_id": "CAM_02",
+    "timestamp": "2026-08-26T10:11:53Z",
+    "confidence": 0.68,
+    "vehicle_type": "bus",
+    "model": "Volvo 9400",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP20JK7890",
+    "camera_id": "CAM_07",
+    "timestamp": "2026-08-26T10:12:00Z",
+    "confidence": 0.96,
+    "vehicle_type": "car",
+    "model": "City",
+    "color": "White"
+  },
+  {
+    "plate_text": "MP09UV4119",
+    "camera_id": "CAM_02",
+    "timestamp": "2026-08-26T10:12:42Z",
+    "confidence": 0.8,
+    "vehicle_type": "bus",
+    "model": "Tata Starbus",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP20AB1234",
+    "camera_id": "CAM_01",
+    "timestamp": "2026-08-26T10:15:00Z",
+    "confidence": 0.45,
+    "vehicle_type": "car",
+    "model": "Swift",
+    "color": "Silver"
+  },
+  {
+    "plate_text": "DL01KF2858",
+    "camera_id": "CAM_08",
+    "timestamp": "2026-08-26T10:15:41Z",
+    "confidence": 0.93,
+    "vehicle_type": "bus",
+    "model": "Ashok Leyland Viking",
+    "color": "Red"
+  },
+  {
+    "plate_text": "DL01AJ3426",
+    "camera_id": "CAM_07",
+    "timestamp": "2026-08-26T10:16:02Z",
+    "confidence": 0.75,
+    "vehicle_type": "car",
+    "model": "WagonR",
+    "color": "Silver"
+  },
+  {
+    "plate_text": "DL01LQ6930",
+    "camera_id": "CAM_04",
+    "timestamp": "2026-08-26T10:17:32Z",
+    "confidence": 0.82,
+    "vehicle_type": "car",
+    "model": "Swift",
+    "color": "Silver"
+  },
+  {
+    "plate_text": "MP20CB5678",
+    "camera_id": "CAM_02",
+    "timestamp": "2026-08-26T10:18:00Z",
+    "confidence": 0.95,
+    "vehicle_type": "bike",
+    "model": "Pulsar",
+    "color": "Black"
+  },
+  {
+    "plate_text": "MP09TK7547",
+    "camera_id": "CAM_04",
+    "timestamp": "2026-08-26T10:18:41Z",
+    "confidence": 0.88,
+    "vehicle_type": "car",
+    "model": "City",
+    "color": "Silver"
+  },
+  {
+    "plate_text": "MP09JT2391",
+    "camera_id": "CAM_01",
+    "timestamp": "2026-08-26T10:19:10Z",
+    "confidence": 0.91,
+    "vehicle_type": "car",
+    "model": "Swift",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP04QJ9313",
+    "camera_id": "CAM_04",
+    "timestamp": "2026-08-26T10:19:42Z",
+    "confidence": 0.81,
+    "vehicle_type": "car",
+    "model": "WagonR",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP20AB1234",
+    "camera_id": "CAM_01",
+    "timestamp": "2026-08-26T10:20:00Z",
+    "confidence": 0.96,
+    "vehicle_type": "car",
+    "model": "Swift",
+    "color": "Silver"
+  },
+  {
+    "plate_text": "MP20AB1234",
+    "camera_id": "CAM_01",
+    "timestamp": "2026-08-26T10:20:03Z",
+    "confidence": 0.96,
+    "vehicle_type": "car",
+    "model": "Swift",
+    "color": "Silver"
+  },
+  {
+    "plate_text": "MP09WK8428",
+    "camera_id": "CAM_06",
+    "timestamp": "2026-08-26T10:20:23Z",
+    "confidence": 0.77,
+    "vehicle_type": "bike",
+    "model": "Splendor",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP20AB1234",
+    "camera_id": "CAM_05",
+    "timestamp": "2026-08-26T10:21:00Z",
+    "confidence": 0.88,
+    "vehicle_type": "car",
+    "model": "Swift",
+    "color": "Silver"
+  },
+  {
+    "plate_text": "MH12ZU2646",
+    "camera_id": "CAM_08",
+    "timestamp": "2026-08-26T10:21:44Z",
+    "confidence": 0.75,
+    "vehicle_type": "car",
+    "model": "Swift",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MH12ST8973",
+    "camera_id": "CAM_03",
+    "timestamp": "2026-08-26T10:24:18Z",
+    "confidence": 0.72,
+    "vehicle_type": "car",
+    "model": "Swift",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MH12BH6925",
+    "camera_id": "CAM_10",
+    "timestamp": "2026-08-26T10:24:45Z",
+    "confidence": 0.67,
+    "vehicle_type": "truck",
+    "model": "Ashok Leyland 2820",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP20EF9012",
+    "camera_id": "CAM_01",
+    "timestamp": "2026-08-26T10:25:00Z",
+    "confidence": 0.94,
+    "vehicle_type": "bus",
+    "model": "Volvo 9400",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP20XH7807",
+    "camera_id": "CAM_03",
+    "timestamp": "2026-08-26T10:25:08Z",
+    "confidence": 0.92,
+    "vehicle_type": "bike",
+    "model": "Splendor",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP20KA8711",
+    "camera_id": "CAM_04",
+    "timestamp": "2026-08-26T10:25:52Z",
+    "confidence": 0.96,
+    "vehicle_type": "bike",
+    "model": "Pulsar",
+    "color": "Black"
+  },
+  {
+    "plate_text": "MP04KW5978",
+    "camera_id": "CAM_05",
+    "timestamp": "2026-08-26T10:26:27Z",
+    "confidence": 0.92,
+    "vehicle_type": "cycle",
+    "model": "Atlas Ultimate",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP20JK7890",
+    "camera_id": "CAM_08",
+    "timestamp": "2026-08-26T10:28:00Z",
+    "confidence": 0.93,
+    "vehicle_type": "car",
+    "model": "City",
+    "color": "White"
+  },
+  {
+    "plate_text": "MH12NT4613",
+    "camera_id": "CAM_08",
+    "timestamp": "2026-08-26T10:28:17Z",
+    "confidence": 0.8,
+    "vehicle_type": "car",
+    "model": "City",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP09MQ6374",
+    "camera_id": "CAM_10",
+    "timestamp": "2026-08-26T10:28:41Z",
+    "confidence": 0.67,
+    "vehicle_type": "bus",
+    "model": "Ashok Leyland Viking",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP20CB5678",
+    "camera_id": "CAM_03",
+    "timestamp": "2026-08-26T10:30:00Z",
+    "confidence": 0.89,
+    "vehicle_type": "bike",
+    "model": "Pulsar",
+    "color": "Black"
+  },
+  {
+    "plate_text": "MP20GH3456",
+    "camera_id": "CAM_01",
+    "timestamp": "2026-08-26T10:30:00Z",
+    "confidence": 0.95,
+    "vehicle_type": "truck",
+    "model": "Tata Prima",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP09RU1659",
+    "camera_id": "CAM_01",
+    "timestamp": "2026-08-26T10:31:12Z",
+    "confidence": 0.94,
+    "vehicle_type": "cycle",
+    "model": "Hero Sprint",
+    "color": "Black"
+  },
+  {
+    "plate_text": "DL01SK8905",
+    "camera_id": "CAM_08",
+    "timestamp": "2026-08-26T10:31:29Z",
+    "confidence": 0.84,
+    "vehicle_type": "bus",
+    "model": "Volvo 9400",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP20SF2964",
+    "camera_id": "CAM_10",
+    "timestamp": "2026-08-26T10:31:37Z",
+    "confidence": 0.85,
+    "vehicle_type": "cycle",
+    "model": "Hero Sprint",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP09RK8517",
+    "camera_id": "CAM_03",
+    "timestamp": "2026-08-26T10:33:08Z",
+    "confidence": 0.73,
+    "vehicle_type": "cycle",
+    "model": "Atlas Ultimate",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MH12XT8777",
+    "camera_id": "CAM_08",
+    "timestamp": "2026-08-26T10:33:48Z",
+    "confidence": 0.73,
+    "vehicle_type": "bike",
+    "model": "Splendor",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP20CC6635",
+    "camera_id": "CAM_10",
+    "timestamp": "2026-08-26T10:33:51Z",
+    "confidence": 0.66,
+    "vehicle_type": "bus",
+    "model": "Ashok Leyland Viking",
+    "color": "Yellow"
+  },
+  {
+    "plate_text": "MP09GB5681",
+    "camera_id": "CAM_04",
+    "timestamp": "2026-08-26T10:34:21Z",
+    "confidence": 0.76,
+    "vehicle_type": "cycle",
+    "model": "Hero Sprint",
+    "color": "Black"
+  },
+  {
+    "plate_text": "MP20AB1234",
+    "camera_id": "CAM_02",
+    "timestamp": "2026-08-26T10:35:00Z",
+    "confidence": 0.94,
+    "vehicle_type": "car",
+    "model": "Swift",
+    "color": "Silver"
+  },
+  {
+    "plate_text": "MP20EF9012",
+    "camera_id": "CAM_02",
+    "timestamp": "2026-08-26T10:35:00Z",
+    "confidence": 0.91,
+    "vehicle_type": "bus",
+    "model": "Volvo 9400",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MH12GQ9595",
+    "camera_id": "CAM_10",
+    "timestamp": "2026-08-26T10:36:06Z",
+    "confidence": 0.93,
+    "vehicle_type": "bike",
+    "model": "Activa",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP20XT3546",
+    "camera_id": "CAM_05",
+    "timestamp": "2026-08-26T10:36:38Z",
+    "confidence": 0.72,
+    "vehicle_type": "bike",
+    "model": "Activa",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MH12GG2976",
+    "camera_id": "CAM_04",
+    "timestamp": "2026-08-26T10:40:07Z",
+    "confidence": 0.9,
+    "vehicle_type": "truck",
+    "model": "Tata Prima",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP20JK7890",
+    "camera_id": "CAM_10",
+    "timestamp": "2026-08-26T10:42:00Z",
+    "confidence": 0.95,
+    "vehicle_type": "car",
+    "model": "City",
+    "color": "White"
+  },
+  {
+    "plate_text": "MP20VP4538",
+    "camera_id": "CAM_04",
+    "timestamp": "2026-08-26T10:42:49Z",
+    "confidence": 0.7,
+    "vehicle_type": "cycle",
+    "model": "Hero Sprint",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP04AG6062",
+    "camera_id": "CAM_06",
+    "timestamp": "2026-08-26T10:44:00Z",
+    "confidence": 0.71,
+    "vehicle_type": "truck",
+    "model": "Eicher Pro",
+    "color": "White"
+  },
+  {
+    "plate_text": "MP20CB5678",
+    "camera_id": "CAM_04",
+    "timestamp": "2026-08-26T10:45:00Z",
+    "confidence": 0.94,
+    "vehicle_type": "bike",
+    "model": "Pulsar",
+    "color": "Black"
+  },
+  {
+    "plate_text": "MP09UF7511",
+    "camera_id": "CAM_09",
+    "timestamp": "2026-08-26T10:46:05Z",
+    "confidence": 0.92,
+    "vehicle_type": "car",
+    "model": "WagonR",
+    "color": "White"
+  },
+  {
+    "plate_text": "DL01GY2127",
+    "camera_id": "CAM_04",
+    "timestamp": "2026-08-26T10:47:18Z",
+    "confidence": 0.7,
+    "vehicle_type": "cycle",
+    "model": "Atlas Ultimate",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MH12FK1960",
+    "camera_id": "CAM_03",
+    "timestamp": "2026-08-26T10:48:00Z",
+    "confidence": 0.99,
+    "vehicle_type": "bike",
+    "model": "Pulsar",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP09VK1320",
+    "camera_id": "CAM_10",
+    "timestamp": "2026-08-26T10:48:30Z",
+    "confidence": 0.65,
+    "vehicle_type": "bike",
+    "model": "Pulsar",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP09VL2040",
+    "camera_id": "CAM_07",
+    "timestamp": "2026-08-26T10:48:38Z",
+    "confidence": 0.99,
+    "vehicle_type": "cycle",
+    "model": "Firefox Target",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MH12JT5295",
+    "camera_id": "CAM_10",
+    "timestamp": "2026-08-26T10:48:52Z",
+    "confidence": 0.87,
+    "vehicle_type": "bike",
+    "model": "Activa",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP20AB1234",
+    "camera_id": "CAM_06",
+    "timestamp": "2026-08-26T10:50:00Z",
+    "confidence": 0.91,
+    "vehicle_type": "car",
+    "model": "Swift",
+    "color": "Silver"
+  },
+  {
+    "plate_text": "MP20GH3456",
+    "camera_id": "CAM_02",
+    "timestamp": "2026-08-26T10:50:00Z",
+    "confidence": 0.9,
+    "vehicle_type": "truck",
+    "model": "Tata Prima",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP20ZJ6876",
+    "camera_id": "CAM_01",
+    "timestamp": "2026-08-26T10:50:17Z",
+    "confidence": 0.71,
+    "vehicle_type": "car",
+    "model": "City",
+    "color": "White"
+  },
+  {
+    "plate_text": "MH12LF6553",
+    "camera_id": "CAM_08",
+    "timestamp": "2026-08-26T10:51:26Z",
+    "confidence": 0.9,
+    "vehicle_type": "bike",
+    "model": "Pulsar",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP20SZ2612",
+    "camera_id": "CAM_01",
+    "timestamp": "2026-08-26T10:51:46Z",
+    "confidence": 0.77,
+    "vehicle_type": "car",
+    "model": "i20",
+    "color": "Silver"
+  },
+  {
+    "plate_text": "MP04VP6400",
+    "camera_id": "CAM_02",
+    "timestamp": "2026-08-26T10:52:22Z",
+    "confidence": 0.95,
+    "vehicle_type": "bus",
+    "model": "Ashok Leyland Viking",
+    "color": "Yellow"
+  },
+  {
+    "plate_text": "MH12CX1251",
+    "camera_id": "CAM_03",
+    "timestamp": "2026-08-26T10:52:55Z",
+    "confidence": 0.87,
+    "vehicle_type": "truck",
+    "model": "Tata Prima",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP09FS4505",
+    "camera_id": "CAM_02",
+    "timestamp": "2026-08-26T10:53:26Z",
+    "confidence": 0.76,
+    "vehicle_type": "bus",
+    "model": "Tata Starbus",
+    "color": "Yellow"
+  },
+  {
+    "plate_text": "MP04KH3085",
+    "camera_id": "CAM_04",
+    "timestamp": "2026-08-26T10:53:42Z",
+    "confidence": 0.97,
+    "vehicle_type": "truck",
+    "model": "Eicher Pro",
+    "color": "White"
+  },
+  {
+    "plate_text": "MH12YD9645",
+    "camera_id": "CAM_10",
+    "timestamp": "2026-08-26T10:54:13Z",
+    "confidence": 0.97,
+    "vehicle_type": "truck",
+    "model": "Eicher Pro",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP20EF9012",
+    "camera_id": "CAM_05",
+    "timestamp": "2026-08-26T10:55:00Z",
+    "confidence": 0.96,
+    "vehicle_type": "bus",
+    "model": "Volvo 9400",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MH12ZR8532",
+    "camera_id": "CAM_03",
+    "timestamp": "2026-08-26T10:55:11Z",
+    "confidence": 0.9,
+    "vehicle_type": "bike",
+    "model": "Splendor",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP04AQ6663",
+    "camera_id": "CAM_06",
+    "timestamp": "2026-08-26T10:55:38Z",
+    "confidence": 0.98,
+    "vehicle_type": "car",
+    "model": "City",
+    "color": "Silver"
+  },
+  {
+    "plate_text": "MP20WP8690",
+    "camera_id": "CAM_08",
+    "timestamp": "2026-08-26T10:56:21Z",
+    "confidence": 0.71,
+    "vehicle_type": "car",
+    "model": "WagonR",
+    "color": "Black"
+  },
+  {
+    "plate_text": "MH12ZR8177",
+    "camera_id": "CAM_09",
+    "timestamp": "2026-08-26T10:57:07Z",
+    "confidence": 0.73,
+    "vehicle_type": "car",
+    "model": "WagonR",
+    "color": "White"
+  },
+  {
+    "plate_text": "MP20GH9022",
+    "camera_id": "CAM_03",
+    "timestamp": "2026-08-26T10:57:34Z",
+    "confidence": 0.81,
+    "vehicle_type": "bike",
+    "model": "Splendor",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MH12PF8800",
+    "camera_id": "CAM_08",
+    "timestamp": "2026-08-26T10:57:50Z",
+    "confidence": 0.66,
+    "vehicle_type": "bike",
+    "model": "Activa",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP20JK7890",
+    "camera_id": "CAM_09",
+    "timestamp": "2026-08-26T10:58:00Z",
+    "confidence": 0.91,
+    "vehicle_type": "car",
+    "model": "City",
+    "color": "White"
+  },
+  {
+    "plate_text": "MP04LY2188",
+    "camera_id": "CAM_01",
+    "timestamp": "2026-08-26T10:58:39Z",
+    "confidence": 0.99,
+    "vehicle_type": "car",
+    "model": "Swift",
+    "color": "Silver"
+  },
+  {
+    "plate_text": "MP09ND4006",
+    "camera_id": "CAM_05",
+    "timestamp": "2026-08-26T10:59:15Z",
+    "confidence": 0.95,
+    "vehicle_type": "car",
+    "model": "City",
+    "color": "White"
+  },
+  {
+    "plate_text": "MP20QE5010",
+    "camera_id": "CAM_03",
+    "timestamp": "2026-08-26T10:59:24Z",
+    "confidence": 0.74,
+    "vehicle_type": "cycle",
+    "model": "Hero Sprint",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MH12SV7325",
+    "camera_id": "CAM_03",
+    "timestamp": "2026-08-26T11:03:02Z",
+    "confidence": 0.69,
+    "vehicle_type": "cycle",
+    "model": "Firefox Target",
+    "color": "Black"
+  },
+  {
+    "plate_text": "MH12CB1609",
+    "camera_id": "CAM_05",
+    "timestamp": "2026-08-26T11:03:07Z",
+    "confidence": 0.68,
+    "vehicle_type": "cycle",
+    "model": "Hero Sprint",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP20JL7071",
+    "camera_id": "CAM_02",
+    "timestamp": "2026-08-26T11:04:41Z",
+    "confidence": 0.77,
+    "vehicle_type": "bus",
+    "model": "Tata Starbus",
+    "color": "Yellow"
+  },
+  {
+    "plate_text": "MP20CB5678",
+    "camera_id": "CAM_06",
+    "timestamp": "2026-08-26T11:05:00Z",
+    "confidence": 0.96,
+    "vehicle_type": "bike",
+    "model": "Pulsar",
+    "color": "Black"
+  },
+  {
+    "plate_text": "MP09HP8753",
+    "camera_id": "CAM_09",
+    "timestamp": "2026-08-26T11:07:22Z",
+    "confidence": 0.79,
+    "vehicle_type": "cycle",
+    "model": "Firefox Target",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP20HJ3385",
+    "camera_id": "CAM_04",
+    "timestamp": "2026-08-26T11:07:26Z",
+    "confidence": 0.84,
+    "vehicle_type": "truck",
+    "model": "Tata Prima",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MH12TW3091",
+    "camera_id": "CAM_10",
+    "timestamp": "2026-08-26T11:08:01Z",
+    "confidence": 0.96,
+    "vehicle_type": "cycle",
+    "model": "Atlas Ultimate",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP20NG8953",
+    "camera_id": "CAM_04",
+    "timestamp": "2026-08-26T11:09:08Z",
+    "confidence": 0.9,
+    "vehicle_type": "cycle",
+    "model": "Atlas Ultimate",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP20AB1234",
+    "camera_id": "CAM_05",
+    "timestamp": "2026-08-26T11:10:00Z",
+    "confidence": 0.97,
+    "vehicle_type": "car",
+    "model": "Swift",
+    "color": "Silver"
+  },
+  {
+    "plate_text": "MP09VS8611",
+    "camera_id": "CAM_01",
+    "timestamp": "2026-08-26T11:11:15Z",
+    "confidence": 0.96,
+    "vehicle_type": "car",
+    "model": "City",
+    "color": "Silver"
+  },
+  {
+    "plate_text": "MH12HQ8025",
+    "camera_id": "CAM_05",
+    "timestamp": "2026-08-26T11:12:39Z",
+    "confidence": 0.67,
+    "vehicle_type": "car",
+    "model": "i20",
+    "color": "Silver"
+  },
+  {
+    "plate_text": "MH12LH4090",
+    "camera_id": "CAM_04",
+    "timestamp": "2026-08-26T11:13:24Z",
+    "confidence": 0.73,
+    "vehicle_type": "bus",
+    "model": "Volvo 9400",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP20UD6096",
+    "camera_id": "CAM_02",
+    "timestamp": "2026-08-26T11:14:01Z",
+    "confidence": 0.97,
+    "vehicle_type": "cycle",
+    "model": "Atlas Ultimate",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP20EF9012",
+    "camera_id": "CAM_01",
+    "timestamp": "2026-08-26T11:15:00Z",
+    "confidence": 0.93,
+    "vehicle_type": "bus",
+    "model": "Volvo 9400",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MH12JY9850",
+    "camera_id": "CAM_07",
+    "timestamp": "2026-08-26T11:15:47Z",
+    "confidence": 0.9,
+    "vehicle_type": "bus",
+    "model": "Ashok Leyland Viking",
+    "color": "Yellow"
+  },
+  {
+    "plate_text": "MP09JD9689",
+    "camera_id": "CAM_01",
+    "timestamp": "2026-08-26T11:16:20Z",
+    "confidence": 0.82,
+    "vehicle_type": "car",
+    "model": "WagonR",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP20ZC7818",
+    "camera_id": "CAM_10",
+    "timestamp": "2026-08-26T11:16:50Z",
+    "confidence": 0.86,
+    "vehicle_type": "cycle",
+    "model": "Firefox Target",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MH12AC4811",
+    "camera_id": "CAM_09",
+    "timestamp": "2026-08-26T11:17:01Z",
+    "confidence": 0.84,
+    "vehicle_type": "cycle",
+    "model": "Firefox Target",
+    "color": "Black"
+  },
+  {
+    "plate_text": "MH12BA8078",
+    "camera_id": "CAM_06",
+    "timestamp": "2026-08-26T11:17:16Z",
+    "confidence": 0.66,
+    "vehicle_type": "truck",
+    "model": "Eicher Pro",
+    "color": "White"
+  },
+  {
+    "plate_text": "MP20XT5689",
+    "camera_id": "CAM_04",
+    "timestamp": "2026-08-26T11:17:51Z",
+    "confidence": 0.77,
+    "vehicle_type": "truck",
+    "model": "Eicher Pro",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP20JK7890",
+    "camera_id": "CAM_06",
+    "timestamp": "2026-08-26T11:18:00Z",
+    "confidence": 0.97,
+    "vehicle_type": "car",
+    "model": "City",
+    "color": "White"
+  },
+  {
+    "plate_text": "MP04NC9254",
+    "camera_id": "CAM_04",
+    "timestamp": "2026-08-26T11:18:02Z",
+    "confidence": 0.9,
+    "vehicle_type": "cycle",
+    "model": "Firefox Target",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MH12SZ6198",
+    "camera_id": "CAM_08",
+    "timestamp": "2026-08-26T11:18:52Z",
+    "confidence": 0.89,
+    "vehicle_type": "cycle",
+    "model": "Firefox Target",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP20GH3456",
+    "camera_id": "CAM_04",
+    "timestamp": "2026-08-26T11:20:00Z",
+    "confidence": 0.94,
+    "vehicle_type": "truck",
+    "model": "Tata Prima",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP20VK2213",
+    "camera_id": "CAM_10",
+    "timestamp": "2026-08-26T11:20:43Z",
+    "confidence": 0.67,
+    "vehicle_type": "truck",
+    "model": "Eicher Pro",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MH12WA2121",
+    "camera_id": "CAM_04",
+    "timestamp": "2026-08-26T11:20:43Z",
+    "confidence": 0.96,
+    "vehicle_type": "truck",
+    "model": "Eicher Pro",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP04NG1832",
+    "camera_id": "CAM_02",
+    "timestamp": "2026-08-26T11:21:27Z",
+    "confidence": 0.93,
+    "vehicle_type": "car",
+    "model": "Swift",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP04QB5505",
+    "camera_id": "CAM_10",
+    "timestamp": "2026-08-26T11:21:37Z",
+    "confidence": 0.84,
+    "vehicle_type": "bike",
+    "model": "Pulsar",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP20WH9117",
+    "camera_id": "CAM_05",
+    "timestamp": "2026-08-26T11:24:25Z",
+    "confidence": 0.93,
+    "vehicle_type": "cycle",
+    "model": "Hero Sprint",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP09ZN3858",
+    "camera_id": "CAM_02",
+    "timestamp": "2026-08-26T11:24:55Z",
+    "confidence": 0.66,
+    "vehicle_type": "car",
+    "model": "WagonR",
+    "color": "Silver"
+  },
+  {
+    "plate_text": "DL01PH5272",
+    "camera_id": "CAM_04",
+    "timestamp": "2026-08-26T11:25:45Z",
+    "confidence": 0.76,
+    "vehicle_type": "bike",
+    "model": "Pulsar",
+    "color": "Black"
+  },
+  {
+    "plate_text": "DL01ZV9666",
+    "camera_id": "CAM_01",
+    "timestamp": "2026-08-26T11:25:52Z",
+    "confidence": 0.84,
+    "vehicle_type": "car",
+    "model": "i20",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MH12GA8622",
+    "camera_id": "CAM_05",
+    "timestamp": "2026-08-26T11:26:34Z",
+    "confidence": 0.7,
+    "vehicle_type": "bus",
+    "model": "Tata Starbus",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP20BM7580",
+    "camera_id": "CAM_07",
+    "timestamp": "2026-08-26T11:27:06Z",
+    "confidence": 0.82,
+    "vehicle_type": "bus",
+    "model": "Volvo 9400",
+    "color": "Yellow"
+  },
+  {
+    "plate_text": "MP04BL9518",
+    "camera_id": "CAM_09",
+    "timestamp": "2026-08-26T11:27:46Z",
+    "confidence": 0.97,
+    "vehicle_type": "truck",
+    "model": "Ashok Leyland 2820",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MH12QY5583",
+    "camera_id": "CAM_01",
+    "timestamp": "2026-08-26T11:28:23Z",
+    "confidence": 0.72,
+    "vehicle_type": "bus",
+    "model": "Volvo 9400",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP09MC4571",
+    "camera_id": "CAM_08",
+    "timestamp": "2026-08-26T11:29:16Z",
+    "confidence": 0.91,
+    "vehicle_type": "truck",
+    "model": "Eicher Pro",
+    "color": "White"
+  },
+  {
+    "plate_text": "DL01YL8679",
+    "camera_id": "CAM_05",
+    "timestamp": "2026-08-26T11:29:25Z",
+    "confidence": 0.97,
+    "vehicle_type": "cycle",
+    "model": "Atlas Ultimate",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MH12QV1106",
+    "camera_id": "CAM_03",
+    "timestamp": "2026-08-26T11:29:27Z",
+    "confidence": 0.77,
+    "vehicle_type": "truck",
+    "model": "Tata Prima",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MH12YE4978",
+    "camera_id": "CAM_02",
+    "timestamp": "2026-08-26T11:29:49Z",
+    "confidence": 0.75,
+    "vehicle_type": "cycle",
+    "model": "Hero Sprint",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP09RG8239",
+    "camera_id": "CAM_09",
+    "timestamp": "2026-08-26T11:30:27Z",
+    "confidence": 0.84,
+    "vehicle_type": "car",
+    "model": "Swift",
+    "color": "Silver"
+  },
+  {
+    "plate_text": "DL01PQ1117",
+    "camera_id": "CAM_02",
+    "timestamp": "2026-08-26T11:30:40Z",
+    "confidence": 0.67,
+    "vehicle_type": "car",
+    "model": "Swift",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP20YY6143",
+    "camera_id": "CAM_02",
+    "timestamp": "2026-08-26T11:32:57Z",
+    "confidence": 0.75,
+    "vehicle_type": "bike",
+    "model": "Splendor",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP09BX2290",
+    "camera_id": "CAM_02",
+    "timestamp": "2026-08-26T11:33:31Z",
+    "confidence": 0.93,
+    "vehicle_type": "cycle",
+    "model": "Hero Sprint",
+    "color": "Black"
+  },
+  {
+    "plate_text": "MP20AG4657",
+    "camera_id": "CAM_03",
+    "timestamp": "2026-08-26T11:34:06Z",
+    "confidence": 0.88,
+    "vehicle_type": "cycle",
+    "model": "Hero Sprint",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "DL01HE1858",
+    "camera_id": "CAM_03",
+    "timestamp": "2026-08-26T11:34:26Z",
+    "confidence": 0.83,
+    "vehicle_type": "car",
+    "model": "City",
+    "color": "Black"
+  },
+  {
+    "plate_text": "MP09SJ7658",
+    "camera_id": "CAM_10",
+    "timestamp": "2026-08-26T11:35:09Z",
+    "confidence": 0.96,
+    "vehicle_type": "truck",
+    "model": "Tata Prima",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MH12BT1502",
+    "camera_id": "CAM_02",
+    "timestamp": "2026-08-26T11:35:33Z",
+    "confidence": 0.72,
+    "vehicle_type": "bus",
+    "model": "Tata Starbus",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP04VG8894",
+    "camera_id": "CAM_05",
+    "timestamp": "2026-08-26T11:35:55Z",
+    "confidence": 0.77,
+    "vehicle_type": "car",
+    "model": "City",
+    "color": "White"
+  },
+  {
+    "plate_text": "MP20EJ9167",
+    "camera_id": "CAM_08",
+    "timestamp": "2026-08-26T11:37:03Z",
+    "confidence": 0.72,
+    "vehicle_type": "cycle",
+    "model": "Hero Sprint",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MH12AT5315",
+    "camera_id": "CAM_09",
+    "timestamp": "2026-08-26T11:37:11Z",
+    "confidence": 0.82,
+    "vehicle_type": "car",
+    "model": "WagonR",
+    "color": "Silver"
+  },
+  {
+    "plate_text": "MP20SC9797",
+    "camera_id": "CAM_05",
+    "timestamp": "2026-08-26T11:38:41Z",
+    "confidence": 0.77,
+    "vehicle_type": "bike",
+    "model": "Pulsar",
+    "color": "Black"
+  },
+  {
+    "plate_text": "DL01TD2143",
+    "camera_id": "CAM_05",
+    "timestamp": "2026-08-26T11:38:50Z",
+    "confidence": 0.94,
+    "vehicle_type": "bike",
+    "model": "Splendor",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP20UP8030",
+    "camera_id": "CAM_09",
+    "timestamp": "2026-08-26T11:38:52Z",
+    "confidence": 0.86,
+    "vehicle_type": "cycle",
+    "model": "Hero Sprint",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP09RQ1349",
+    "camera_id": "CAM_01",
+    "timestamp": "2026-08-26T11:40:21Z",
+    "confidence": 0.73,
+    "vehicle_type": "truck",
+    "model": "Eicher Pro",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP09RX1645",
+    "camera_id": "CAM_05",
+    "timestamp": "2026-08-26T11:40:28Z",
+    "confidence": 0.66,
+    "vehicle_type": "bike",
+    "model": "Splendor",
+    "color": "Black"
+  },
+  {
+    "plate_text": "DL01HN8048",
+    "camera_id": "CAM_02",
+    "timestamp": "2026-08-26T11:41:44Z",
+    "confidence": 0.69,
+    "vehicle_type": "cycle",
+    "model": "Atlas Ultimate",
+    "color": "Black"
+  },
+  {
+    "plate_text": "MH12LS9375",
+    "camera_id": "CAM_08",
+    "timestamp": "2026-08-26T11:41:57Z",
+    "confidence": 0.98,
+    "vehicle_type": "truck",
+    "model": "Eicher Pro",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MH12XM1472",
+    "camera_id": "CAM_10",
+    "timestamp": "2026-08-26T11:42:15Z",
+    "confidence": 0.89,
+    "vehicle_type": "bike",
+    "model": "Splendor",
+    "color": "Black"
+  },
+  {
+    "plate_text": "MH12AT6442",
+    "camera_id": "CAM_07",
+    "timestamp": "2026-08-26T11:42:42Z",
+    "confidence": 0.94,
+    "vehicle_type": "truck",
+    "model": "Ashok Leyland 2820",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP04WU4752",
+    "camera_id": "CAM_01",
+    "timestamp": "2026-08-26T11:43:20Z",
+    "confidence": 0.79,
+    "vehicle_type": "car",
+    "model": "i20",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP04NR6491",
+    "camera_id": "CAM_02",
+    "timestamp": "2026-08-26T11:44:48Z",
+    "confidence": 0.73,
+    "vehicle_type": "bike",
+    "model": "Activa",
+    "color": "Black"
+  },
+  {
+    "plate_text": "MP20HH7622",
+    "camera_id": "CAM_09",
+    "timestamp": "2026-08-26T11:45:00Z",
+    "confidence": 0.87,
+    "vehicle_type": "cycle",
+    "model": "Firefox Target",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP09LP3441",
+    "camera_id": "CAM_05",
+    "timestamp": "2026-08-26T11:45:09Z",
+    "confidence": 0.67,
+    "vehicle_type": "truck",
+    "model": "Ashok Leyland 2820",
+    "color": "White"
+  },
+  {
+    "plate_text": "MP04UK7906",
+    "camera_id": "CAM_05",
+    "timestamp": "2026-08-26T11:46:05Z",
+    "confidence": 0.81,
+    "vehicle_type": "cycle",
+    "model": "Hero Sprint",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP04RL5097",
+    "camera_id": "CAM_08",
+    "timestamp": "2026-08-26T11:48:19Z",
+    "confidence": 0.72,
+    "vehicle_type": "bus",
+    "model": "Tata Starbus",
+    "color": "Yellow"
+  },
+  {
+    "plate_text": "MP09AF8784",
+    "camera_id": "CAM_10",
+    "timestamp": "2026-08-26T11:48:49Z",
+    "confidence": 0.67,
+    "vehicle_type": "bus",
+    "model": "Ashok Leyland Viking",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MH12MV5397",
+    "camera_id": "CAM_06",
+    "timestamp": "2026-08-26T11:49:15Z",
+    "confidence": 0.93,
+    "vehicle_type": "car",
+    "model": "WagonR",
+    "color": "Black"
+  },
+  {
+    "plate_text": "MP04JS2315",
+    "camera_id": "CAM_06",
+    "timestamp": "2026-08-26T11:49:43Z",
+    "confidence": 0.94,
+    "vehicle_type": "bus",
+    "model": "Tata Starbus",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP09AE6378",
+    "camera_id": "CAM_05",
+    "timestamp": "2026-08-26T11:50:04Z",
+    "confidence": 0.98,
+    "vehicle_type": "bike",
+    "model": "Pulsar",
+    "color": "Blue"
+  },
+  {
+    "plate_text": "MP20QK4945",
+    "camera_id": "CAM_08",
+    "timestamp": "2026-08-26T11:56:37Z",
+    "confidence": 0.7,
+    "vehicle_type": "bus",
+    "model": "Ashok Leyland Viking",
+    "color": "Red"
+  },
+  {
+    "plate_text": "MP20RN1241",
+    "camera_id": "CAM_02",
+    "timestamp": "2026-08-26T11:58:48Z",
+    "confidence": 0.94,
+    "vehicle_type": "truck",
+    "model": "Ashok Leyland 2820",
+    "color": "Blue"
+  }
+]
