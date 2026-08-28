@@ -1,1 +1,6 @@
+train: /content/train/images
+val: /content/valid/images
+test: /content/test/images
 
+nc: 1
+names: ['license_plate']
