@@ -5,3 +5,9 @@ venv/
 ml/dataset/
 *.zip
 ml/runs/
+.env
+.env.local
+test_samples/images/
+test_samples/indian_noplt/
+test_samples/outputs/
+yolo11n.pt
