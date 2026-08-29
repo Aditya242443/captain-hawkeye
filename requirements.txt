@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+psycopg2-binary
+python-dotenv
+ultralytics
+opencv-python
+paddleocr
+paddlepaddle
+numpy   
+pytest
+pydantic
+fastapi
