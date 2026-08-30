@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Live Traffic Map - Hawkeye</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e1e2ec",
+                        "on-primary-fixed": "#001848",
+                        "inverse-surface": "#2e3038",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#475a7e",
+                        "surface-container": "#ededf8",
+                        "surface-dim": "#d9d9e4",
+                        "on-surface-variant": "#434654",
+                        "inverse-on-surface": "#f0f0fb",
+                        "tertiary-container": "#a33500",
+                        "tertiary-fixed": "#ffdbcf",
+                        "surface": "#faf8ff",
+                        "secondary-fixed": "#d7e2ff",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#737685",
+                        "surface-container-low": "#f3f3fd",
+                        "on-tertiary-fixed-variant": "#812800",
+                        "on-primary-container": "#c4d2ff",
+                        "surface-tint": "#0c56d0",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#0040a2",
+                        "on-background": "#191b23",
+                        "surface-bright": "#faf8ff",
+                        "inverse-primary": "#b2c5ff",
+                        "on-tertiary-fixed": "#380d00",
+                        "secondary-container": "#bfd2fd",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#b4c7f1",
+                        "primary-container": "#0052cc",
+                        "on-secondary-fixed": "#041b3c",
+                        "tertiary-fixed-dim": "#ffb59b",
+                        "background": "#faf8ff",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "primary": "#003d9b",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#34476a",
+                        "primary-fixed": "#dae2ff",
+                        "on-error": "#ffffff",
+                        "on-surface": "#191b23",
+                        "primary-fixed-dim": "#b2c5ff",
+                        "on-tertiary-container": "#ffc6b2",
+                        "secondary": "#4c5e83",
+                        "tertiary": "#7b2600",
+                        "outline-variant": "#c3c6d6",
+                        "surface-container-high": "#e7e7f2",
+                        "surface-variant": "#e1e2ec"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "container-padding": "24px",
+                        "unit": "4px",
+                        "stack-sm": "8px",
+                        "gutter": "16px",
+                        "stack-lg": "24px"
+                    },
+                    "fontFamily": {
+                        "mono-md": ["JetBrains Mono", "monospace"],
+                        "body-lg": ["Inter", "sans-serif"],
+                        "display-lg": ["Inter", "sans-serif"],
+                        "headline-md": ["Inter", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "headline-lg": ["Inter", "sans-serif"],
+                        "label-md": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "mono-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f3f3fd; color: #191b23; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        .shadow-elevation-1 { box-shadow: 0 2px 4px rgba(9, 30, 66, 0.08); }
+        .shadow-elevation-2 { box-shadow: 0 8px 16px rgba(9, 30, 66, 0.12); }
+        
+        /* Map specific styles */
+        .map-bg { background-color: #e5e9f2; }
+        .road-normal { stroke: #4ade80; stroke-width: 4; }
+        .road-moderate { stroke: #fb923c; stroke-width: 4; }
+        .road-high { stroke: #ef4444; stroke-width: 6; }
+        .road-base { stroke: #cbd5e1; stroke-width: 8; stroke-linecap: round; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden antialiased bg-surface-container-low">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-full w-[240px] bg-surface border-r border-outline-variant flex flex-col py-stack-md z-50">
+<div class="px-container-padding mb-stack-lg flex items-center gap-stack-sm">
+<div class="w-8 h-8 bg-primary-container rounded flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined icon-fill">visibility</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Hawkeye</h1>
+<p class="font-label-md text-label-md text-on-surface-variant">AI Traffic Management</p>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto px-stack-sm flex flex-col gap-unit">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">visibility</span>
+<span class="font-body-md text-body-md font-medium">ANPR &amp; OCR</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-body-md text-body-md font-medium">Vehicle Tracking</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-primary font-semibold bg-primary-container/10 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined icon-fill">map</span>
+<span class="font-body-md text-body-md">Live Map</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-body-md text-body-md font-medium">Traffic Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-body-md text-body-md font-medium">Alerts</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-body-md text-body-md font-medium">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md font-medium">Settings</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-[240px] flex flex-col h-full overflow-hidden">
+<!-- TopAppBar -->
+<header class="h-16 bg-surface-container-lowest border-b border-outline-variant shadow-sm flex justify-between items-center px-container-padding shrink-0 z-40">
+<div>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">Live Traffic Map</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Real-time view of city traffic, ANPR cameras and congestion hotspots.</p>
+</div>
+<div class="flex items-center gap-stack-md">
+<div class="flex items-center gap-2 text-on-surface-variant mr-4">
+<span class="material-symbols-outlined text-[18px]">update</span>
+<span class="font-label-md text-label-md">Last updated: 10:42 AM</span>
+</div>
+<button class="p-2 rounded hover:bg-surface-container-low text-on-surface-variant transition-colors" title="Refresh">
+<span class="material-symbols-outlined">refresh</span>
+</button>
+<button class="p-2 rounded hover:bg-surface-container-low text-on-surface-variant transition-colors relative" title="Notifications">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant cursor-pointer ml-2">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAED4xM63B_E-7mG3BBC2icGm5Ov8FZdpTV0fgf3ZAcB3oOfnVDajzZLqnO4Pwe39-l0LKm4YhxjUP5hv9sLW7DYnD-wek7Se6w28MF24VxTz-686lmU3bNXFb3rWEclp5EL3Ng188cMowdHyisLQEwncpxqUP5uZYwZ41DvpniytQHGBcXqW_nqaoeUoUdR3ltn5rZDSZ-r2Ou9_elKe_kKzEDp1Irn1_MQjv2LcTriazN1y_a2Jy7"/>
+</div>
+</div>
+</header>
+<!-- Dashboard Canvas -->
+<main class="flex-1 flex p-gutter gap-gutter overflow-hidden bg-surface-container-low">
+<!-- Map Container (Left 75%) -->
+<div class="w-3/4 flex flex-col gap-gutter h-full relative rounded-lg overflow-hidden border border-outline-variant shadow-elevation-1 bg-white">
+<!-- Map Top Controls -->
+<div class="absolute top-4 left-4 right-4 z-10 flex justify-between items-start pointer-events-none">
+<!-- Search & Filters -->
+<div class="pointer-events-auto bg-surface-container-lowest rounded-lg shadow-elevation-2 border border-outline-variant p-2 flex flex-col gap-2 w-80">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-3 py-2 bg-surface-container border border-outline-variant rounded focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md outline-none transition-colors" placeholder="Search camera, road or location..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-primary-container text-on-primary rounded-full font-label-md text-label-md">All</button>
+<button class="px-3 py-1 bg-surface-container hover:bg-surface-container-high text-on-surface rounded-full font-label-md text-label-md transition-colors border border-outline-variant">Cameras</button>
+<button class="px-3 py-1 bg-surface-container hover:bg-surface-container-high text-on-surface rounded-full font-label-md text-label-md transition-colors border border-outline-variant">Congestion</button>
+</div>
+</div>
+<!-- Time & Layers Controls -->
+<div class="flex gap-3 pointer-events-auto">
+<div class="bg-surface-container-lowest rounded-lg shadow-elevation-2 border border-outline-variant p-1 flex">
+<button class="px-3 py-1.5 bg-primary-container/10 text-primary font-label-md text-label-md rounded font-semibold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span> Live
+                            </button>
+<button class="px-3 py-1.5 hover:bg-surface-container text-on-surface-variant font-label-md text-label-md rounded transition-colors">15m</button>
+<button class="px-3 py-1.5 hover:bg-surface-container text-on-surface-variant font-label-md text-label-md rounded transition-colors">1h</button>
+<button class="px-3 py-1.5 hover:bg-surface-container text-on-surface-variant font-label-md text-label-md rounded transition-colors">Today</button>
+</div>
+<div class="flex flex-col gap-2">
+<button class="w-10 h-10 bg-surface-container-lowest rounded-lg shadow-elevation-2 border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors" title="Layers">
+<span class="material-symbols-outlined">layers</span>
+</button>
+<button class="w-10 h-10 bg-surface-container-lowest rounded-lg shadow-elevation-2 border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-colors" title="Locate Me">
+<span class="material-symbols-outlined">my_location</span>
+</button>
+<div class="flex flex-col bg-surface-container-lowest rounded-lg shadow-elevation-2 border border-outline-variant overflow-hidden mt-2">
+<button class="w-10 h-10 flex items-center justify-center text-on-surface hover:bg-surface-container-low border-b border-outline-variant" title="Zoom In">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-on-surface hover:bg-surface-container-low" title="Zoom Out">
+<span class="material-symbols-outlined">remove</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Map Legend -->
+<div class="absolute bottom-4 left-4 z-10 bg-surface-container-lowest rounded-lg shadow-elevation-2 border border-outline-variant p-3 pointer-events-auto flex gap-6">
+<div>
+<h4 class="font-label-md text-label-md text-on-surface-variant mb-2 uppercase">Traffic Density</h4>
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center gap-2"><div class="w-4 h-1 bg-[#4ade80] rounded-full"></div><span class="font-body-md text-[12px]">Normal</span></div>
+<div class="flex items-center gap-2"><div class="w-4 h-1 bg-[#fb923c] rounded-full"></div><span class="font-body-md text-[12px]">Moderate</span></div>
+<div class="flex items-center gap-2"><div class="w-4 h-1 bg-[#ef4444] rounded-full"></div><span class="font-body-md text-[12px]">High</span></div>
+</div>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface-variant mb-2 uppercase">Map Elements</h4>
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-primary">videocam</span><span class="font-body-md text-[12px]">Camera</span></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-error">warning</span><span class="font-body-md text-[12px]">Incident</span></div>
+</div>
+</div>
+</div>
+<!-- Placeholder for Map Visualization (SVG used for structural representation) -->
+<div class="w-full h-full bg-[#f8f9fa] overflow-hidden relative cursor-grab" style="background-image: radial-gradient(#e1e2ec 1px, transparent 1px); background-size: 20px 20px;">
+<!-- Simulated Map Graphic -->
+<svg class="absolute inset-0 w-full h-full opacity-60" preserveaspectratio="xMidYMid slice" viewbox="0 0 1000 800">
+<!-- Base Roads -->
+<path class="road-base" d="M-100,200 L1100,200"></path>
+<path class="road-base" d="M-100,450 L1100,450"></path>
+<path class="road-base" d="M-100,650 L1100,650"></path>
+<path class="road-base" d="M250,-100 L250,900"></path>
+<path class="road-base" d="M550,-100 L550,900"></path>
+<path class="road-base" d="M800,-100 L800,900"></path>
+<!-- Diagonal -->
+<path class="road-base" d="M-50,-50 L1050,850"></path>
+<!-- Traffic Overlay -->
+<path class="road-normal" d="M-100,200 L250,200"></path>
+<path class="road-moderate" d="M250,200 L550,200"></path>
+<path class="road-high" d="M550,200 L800,200"></path>
+<path class="road-normal" d="M800,200 L1100,200"></path>
+<path class="road-normal" d="M550,-100 L550,200"></path>
+<path class="road-high" d="M550,200 L550,450"></path>
+<!-- Labels -->
+<text fill="#434654" font-family="Inter" font-size="12" font-weight="600" letter-spacing="1" x="350" y="190">MG ROAD</text>
+<text fill="#434654" font-family="Inter" font-size="12" font-weight="600" letter-spacing="1" x="600" y="440">CIVIL LINES</text>
+<!-- Intersections & Hotspots -->
+<circle cx="550" cy="200" fill="#ffdad6" opacity="0.8" r="12" stroke="#ba1a1a" stroke-width="2"></circle>
+<text fill="#ba1a1a" font-family="Inter" font-size="10" font-weight="600" x="570" y="195">WRIGHT TOWN CIRCLE</text>
+</svg>
+<!-- Camera Markers (HTML Overlays) -->
+<!-- CAM_01 with Popup -->
+<div class="absolute top-[180px] left-[530px] z-20 group">
+<!-- Popup -->
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 bg-surface-container-lowest rounded shadow-elevation-2 border border-outline-variant p-3 opacity-100 transition-opacity">
+<div class="flex justify-between items-center mb-2 border-b border-outline-variant pb-2">
+<span class="font-label-md text-label-md text-on-surface">CAM_01</span>
+<span class="flex items-center gap-1 font-label-md text-[10px] text-[#16a34a]"><div class="w-1.5 h-1.5 rounded-full bg-[#16a34a]"></div>Online</span>
+</div>
+<div class="flex flex-col gap-1 font-mono-md text-[12px] text-on-surface-variant">
+<div>Vehicles: <span class="text-on-surface font-semibold">214/hr</span></div>
+<div>Avg Speed: <span class="text-on-surface font-semibold">18.4 km/h</span></div>
+<div class="text-error mt-1">High Congestion Detected</div>
+</div>
+<!-- Triangle pointer -->
+<div class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-surface-container-lowest border-b border-r border-outline-variant transform rotate-45"></div>
+</div>
+<!-- Marker -->
+<div class="w-8 h-8 bg-surface-container-lowest rounded-full shadow-md border-2 border-primary flex items-center justify-center cursor-pointer relative z-10">
+<span class="material-symbols-outlined text-primary text-[16px]">videocam</span>
+<div class="absolute -top-1 -right-1 w-3 h-3 bg-[#16a34a] border-2 border-white rounded-full"></div>
+</div>
+</div>
+<!-- Other Cameras -->
+<div class="absolute top-[180px] left-[230px] z-20 hover:z-30">
+<div class="w-8 h-8 bg-surface-container-lowest rounded-full shadow-md border border-outline flex items-center justify-center cursor-pointer hover:border-primary hover:shadow-lg transition-all">
+<span class="material-symbols-outlined text-on-surface-variant text-[16px]">videocam</span>
+<div class="absolute -top-1 -right-1 w-3 h-3 bg-[#16a34a] border-2 border-white rounded-full"></div>
+</div>
+</div>
+<div class="absolute top-[430px] left-[780px] z-20 hover:z-30">
+<div class="w-8 h-8 bg-surface-container-lowest rounded-full shadow-md border border-outline flex items-center justify-center cursor-pointer hover:border-primary hover:shadow-lg transition-all">
+<span class="material-symbols-outlined text-on-surface-variant text-[16px]">videocam</span>
+<div class="absolute -top-1 -right-1 w-3 h-3 bg-[#16a34a] border-2 border-white rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Information Panel (Right 25%) -->
+<div class="w-1/4 h-full bg-surface-container-lowest rounded-lg border border-outline-variant shadow-elevation-1 flex flex-col overflow-hidden">
+<div class="p-4 border-b border-outline-variant">
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">analytics</span> Traffic Overview
+                    </h3>
+</div>
+<div class="p-4 flex-1 overflow-y-auto flex flex-col gap-6">
+<!-- Quick Stats Grid -->
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-surface-container p-3 rounded-lg border border-outline-variant">
+<div class="font-label-md text-label-md text-on-surface-variant mb-1">Active Cameras</div>
+<div class="font-headline-md text-headline-md text-on-surface font-bold">42 <span class="text-[#16a34a] text-sm font-normal">/45</span></div>
+</div>
+<div class="bg-surface-container p-3 rounded-lg border border-outline-variant">
+<div class="font-label-md text-label-md text-on-surface-variant mb-1">Vehicles (Live)</div>
+<div class="font-headline-md text-headline-md text-on-surface font-bold">12,450</div>
+</div>
+<div class="bg-error-container p-3 rounded-lg border border-error/20">
+<div class="font-label-md text-label-md text-on-error-container mb-1">Congested Areas</div>
+<div class="font-headline-md text-headline-md text-error font-bold flex items-center gap-1">7 <span class="material-symbols-outlined text-[16px]">trending_up</span></div>
+</div>
+<div class="bg-surface-container p-3 rounded-lg border border-outline-variant">
+<div class="font-label-md text-label-md text-on-surface-variant mb-1">Avg Speed</div>
+<div class="font-headline-md text-headline-md text-on-surface font-bold">32.6 <span class="text-sm font-normal text-on-surface-variant">km/h</span></div>
+</div>
+</div>
+<!-- Current Congestion List -->
+<div>
+<div class="flex justify-between items-center mb-3">
+<h4 class="font-label-md text-label-md text-on-surface-variant uppercase">Current Congestion</h4>
+<a class="text-primary font-body-md text-sm hover:underline" href="#">View All</a>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Item 1: High -->
+<div class="border border-outline-variant rounded-lg p-3 hover:bg-surface-container-low transition-colors cursor-pointer border-l-4 border-l-error">
+<div class="flex justify-between items-start mb-2">
+<h5 class="font-body-md text-body-md font-semibold text-on-surface">Wright Town Circle</h5>
+<span class="px-2 py-0.5 bg-error text-on-error text-[10px] font-bold rounded uppercase">High</span>
+</div>
+<div class="flex gap-4 font-mono-md text-[12px] text-on-surface-variant">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">directions_car</span> 340</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">speed</span> 18.4 km/h</div>
+</div>
+</div>
+<!-- Item 2: Moderate -->
+<div class="border border-outline-variant rounded-lg p-3 hover:bg-surface-container-low transition-colors cursor-pointer border-l-4 border-l-[#fb923c]">
+<div class="flex justify-between items-start mb-2">
+<h5 class="font-body-md text-body-md font-semibold text-on-surface">MG Road Junction</h5>
+<span class="px-2 py-0.5 bg-[#fff7ed] text-[#ea580c] text-[10px] font-bold rounded uppercase border border-[#fed7aa]">Moderate</span>
+</div>
+<div class="flex gap-4 font-mono-md text-[12px] text-on-surface-variant">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">directions_car</span> 214</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">speed</span> 24.2 km/h</div>
+</div>
+</div>
+<!-- Item 3: Normal -->
+<div class="border border-outline-variant rounded-lg p-3 hover:bg-surface-container-low transition-colors cursor-pointer border-l-4 border-l-[#4ade80]">
+<div class="flex justify-between items-start mb-2">
+<h5 class="font-body-md text-body-md font-semibold text-on-surface">Civil Lines</h5>
+<span class="px-2 py-0.5 bg-[#f0fdf4] text-[#16a34a] text-[10px] font-bold rounded uppercase border border-[#bbf7d0]">Normal</span>
+</div>
+<div class="flex gap-4 font-mono-md text-[12px] text-on-surface-variant">
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">directions_car</span> 189</div>
+<div class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">speed</span> 31.5 km/h</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Mini Live Feed Thumbnail -->
+<div class="mt-auto">
+<h4 class="font-label-md text-label-md text-on-surface-variant uppercase mb-2">Live ANPR Feed (CAM_01)</h4>
+<div class="relative h-32 bg-black rounded-lg overflow-hidden border border-outline-variant group">
+<!-- Simulate camera feed with placeholder -->
+<div class="w-full h-full bg-cover bg-center opacity-80 group-hover:opacity-100 transition-opacity" data-alt="A simulated live traffic camera feed showing a busy intersection during the day. Cars are waiting at a red light. The scene is slightly grainy to mimic a security camera, shot from an elevated angle." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB2hHxFssgUcuXlloEVfU6B1WKS93jIKFfkxNGPzLbpgiPC_vdfgShJz6x58aD185tVUQKBgXbQdWVKTqCwZhwkDIxtltCGHbAx7jTgHOinoKXbNra9foM1WYLx8FToCtUGzO_H3ThUGDDq4AFr4bGc__xxzmb9F-Z3BI2in---Lz0bzLnvV0x2tfFK1zyGRaHSO6hBJmapOZuZaq4Pe0UImrdgb0kbaaKmEr7PjEOcKnYgvS1fXZWz')"></div>
+<div class="absolute top-2 right-2 bg-black/60 px-1.5 py-0.5 rounded text-white font-mono-md text-[10px] border border-white/20">
+                                 10:42:35 AM
+                             </div>
+<div class="absolute bottom-2 left-2 flex items-center gap-1 text-white font-mono-md text-[10px] bg-black/60 px-1.5 py-0.5 rounded border border-white/20">
+<div class="w-1.5 h-1.5 bg-error rounded-full animate-pulse"></div> REC
+                             </div>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40 cursor-pointer">
+<span class="material-symbols-outlined text-white text-3xl">open_in_new</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

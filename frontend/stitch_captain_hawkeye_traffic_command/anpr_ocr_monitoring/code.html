@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Captain Hawkeye - ANPR & OCR</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#191b23",
+                        "primary-fixed": "#dae2ff",
+                        "on-secondary-fixed-variant": "#34476a",
+                        "surface": "#faf8ff",
+                        "surface-container-low": "#f3f3fd",
+                        "background": "#faf8ff",
+                        "primary-container": "#0052cc",
+                        "on-tertiary-container": "#ffc6b2",
+                        "surface-container-highest": "#e1e2ec",
+                        "outline-variant": "#c3c6d6",
+                        "on-primary-fixed-variant": "#0040a2",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#475a7e",
+                        "on-background": "#191b23",
+                        "inverse-primary": "#b2c5ff",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#7b2600",
+                        "surface-tint": "#0c56d0",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#d9d9e4",
+                        "inverse-surface": "#2e3038",
+                        "on-surface-variant": "#434654",
+                        "primary-fixed-dim": "#b2c5ff",
+                        "surface-bright": "#faf8ff",
+                        "secondary-fixed-dim": "#b4c7f1",
+                        "surface-container-high": "#e7e7f2",
+                        "primary": "#003d9b",
+                        "outline": "#737685",
+                        "secondary-fixed": "#d7e2ff",
+                        "on-primary-container": "#c4d2ff",
+                        "inverse-on-surface": "#f0f0fb",
+                        "tertiary-container": "#a33500",
+                        "on-tertiary-fixed-variant": "#812800",
+                        "tertiary-fixed-dim": "#ffb59b",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#ededf8",
+                        "on-secondary-fixed": "#041b3c",
+                        "on-tertiary-fixed": "#380d00",
+                        "on-primary-fixed": "#001848",
+                        "secondary-container": "#bfd2fd",
+                        "surface-variant": "#e1e2ec",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#ffdbcf",
+                        "secondary": "#4c5e83"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "gutter": "16px",
+                        "stack-md": "16px",
+                        "container-padding": "24px",
+                        "stack-lg": "24px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "mono-md": ["JetBrains Mono"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "mono-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased overflow-hidden flex h-screen">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-60 bg-surface border-r border-outline-variant flex flex-col py-gutter px-stack-sm z-20">
+<div class="mb-8 px-4">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Hawkeye</h1>
+<p class="text-xs text-on-surface-variant uppercase tracking-wider mt-1">AI Traffic Management</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary font-semibold bg-primary-container/10 transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">visibility</span>
+<span class="font-medium text-sm">ANPR & OCR</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-medium text-sm">Vehicle Tracking</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-medium text-sm">Live Map</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-medium text-sm">Traffic Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-medium text-sm">Alerts</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-medium text-sm">Reports</span>
+</a>
+</nav>
+<div class="mt-auto">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium text-sm">Settings</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col ml-60 min-h-screen overflow-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface-container-lowest border-b border-outline-variant shadow-sm h-16 px-gutter flex justify-between items-center z-10 sticky top-0">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">Traffic Command Center</h2>
+</div>
+<div class="flex-1 max-w-md mx-8">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-[#FAFBFC] border-2 border-[#DFE1E6] rounded-md pl-10 pr-4 py-2 text-sm focus:outline-none focus:border-primary-container focus:ring-0 transition-colors" placeholder="Search plates, cameras, or alerts... (CMD+K)" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full border border-surface-container-lowest"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined">calendar_today</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container/20 flex items-center justify-center border border-primary-container/30 overflow-hidden cursor-pointer ml-2">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO29imTAfuHea3FW4OpyGD-eQnW6D-zMpuGQ-AYUXDwSx1nTEBnXzu28OwSaZ0uYMvB8tO6walng7WXBj40HuibdaV1Is7WFGx1OSwZsjg7U3hqdlO9XFpU1goA2E51pr5sQMIOk76IdH4qOTExD7IZzpvl5WO9pc9p8OnI8FebMo-QsWPEvBIqDO32t8wbKk8ecAfk3xkU59vOB40da22BFzd--iuQZAxdq-dpz8PJXuVYs6uUTQR"/>
+</div>
+</div>
+</header>
+<!-- Main Workspace -->
+<main class="flex-1 overflow-y-auto p-container-padding bg-background">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter h-full">
+<!-- Left Column (Live Feed & Table) -->
+<div class="lg:col-span-8 flex flex-col gap-gutter">
+<!-- Live Camera Feed Widget -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg shadow-sm overflow-hidden flex flex-col">
+<div class="px-4 py-3 border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container animate-pulse">videocam</span>
+<h3 class="font-headline-md text-[16px] font-semibold text-on-surface">Live Camera Feed</h3>
+<span class="ml-3 px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 border border-emerald-200">
+<span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                                    AI Detection Active
+                                </span>
+</div>
+<div class="flex gap-2">
+<button class="text-xs font-medium text-on-surface-variant hover:text-on-surface px-2 py-1 rounded hover:bg-surface-container-low">CAM-08</button>
+<button class="text-xs font-medium text-on-surface-variant hover:text-on-surface px-2 py-1 rounded hover:bg-surface-container-low"><span class="material-symbols-outlined text-[16px]">fullscreen</span></button>
+</div>
+</div>
+<div class="relative w-full aspect-video bg-black overflow-hidden group">
+<!-- Fallback/Placeholder Image for feed -->
+<img alt="Live traffic feed" class="w-full h-full object-cover" data-alt="High-angle wide shot of a busy multi-lane city intersection during daylight. Dozens of cars, buses, and scooters navigating the junction. Sharp focus, high contrast, realistic urban CCTV aesthetic, slight desaturation typical of traffic cameras." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAObzK1IQ_bShSsnM0eo9G1PQG2aNviICZUrqw9hS29Gp4XWgdCE_b72JmY75l3-W4Iu2G-qbtqON6rEqg5F4DTWLJjrkgb1tXk4cwWNVf9OfPz7sykwrXh7X2bbJdwGhVJywNsjbmN-NigM1H14RDXqy4r1NoSwcXNJvGZPegVIwdFVpFJ3wd2p2VMt06Di83164TRVO-go-76hazsV3FesPLvTBTNTlEKzHXBz8nnXvzw63dMUMzF"/>
+<!-- Bounding Boxes Overlay -->
+<div class="absolute inset-0 pointer-events-none">
+<!-- Box 1 -->
+<div class="absolute border-2 border-[#00ff00] bg-[#00ff00]/10 flex flex-col justify-end" style="top: 55%; left: 45%; width: 6%; height: 5%;">
+<div class="bg-[#00ff00]/80 text-black text-[10px] font-mono-md font-bold px-1 whitespace-nowrap absolute -top-4 -left-0.5 border border-[#00ff00]">
+                                        MP09AB1234 (98%)
+                                    </div>
+</div>
+<!-- Box 2 -->
+<div class="absolute border-2 border-[#00ff00] bg-[#00ff00]/10 flex flex-col justify-end" style="top: 68%; left: 75%; width: 5%; height: 4%;">
+<div class="bg-[#00ff00]/80 text-black text-[10px] font-mono-md font-bold px-1 whitespace-nowrap absolute -top-4 -left-0.5 border border-[#00ff00]">
+                                        KA01XY5678 (94%)
+                                    </div>
+</div>
+</div>
+<!-- Feed Overlay Info -->
+<div class="absolute top-4 right-4 bg-black/60 px-2 py-1 rounded backdrop-blur-sm border border-white/10">
+<span class="font-mono-md text-[12px] text-white tracking-widest">2024-05-21 14:35:22 UTC</span>
+</div>
+<div class="absolute top-4 left-4 flex gap-2">
+<span class="bg-black/60 text-white font-mono-md text-[12px] px-2 py-1 rounded backdrop-blur-sm border border-white/10 flex items-center gap-1">
+<span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span> REC
+                                </span>
+</div>
+</div>
+</div>
+<!-- Recent Detections Table Widget -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg shadow-sm flex flex-col flex-1 min-h-[300px]">
+<div class="px-4 py-3 border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest">
+<h3 class="font-headline-md text-[16px] font-semibold text-on-surface">Recent Detections</h3>
+<div class="flex gap-2">
+<button class="text-sm font-medium text-primary-container bg-surface-container-lowest border border-primary-container hover:bg-primary-container/5 px-3 py-1.5 rounded transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">download</span> Export Report
+                                </button>
+<button class="text-sm font-medium text-primary-container bg-surface-container-lowest border border-primary-container hover:bg-primary-container/5 px-3 py-1.5 rounded transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">visibility</span> View Details
+                                </button>
+</div>
+</div>
+<!-- Filter Bar -->
+<div class="px-4 py-3 bg-[#FAFBFC] border-b border-outline-variant flex gap-3 items-center flex-wrap">
+<div class="relative flex-1 min-w-[150px]">
+<span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-outline text-[18px]">search</span>
+<input class="w-full bg-white border border-[#DFE1E6] rounded px-8 py-1.5 text-sm focus:border-primary-container focus:ring-0" placeholder="Plate..." type="text"/>
+</div>
+<div class="flex items-center gap-1 bg-white border border-[#DFE1E6] rounded px-2 py-1.5 min-w-[130px]">
+<span class="material-symbols-outlined text-outline text-[16px]">calendar_today</span>
+<span class="text-sm text-on-surface-variant">Today</span>
+</div>
+<select class="bg-white border border-[#DFE1E6] rounded px-2 py-1.5 text-sm focus:border-primary-container focus:ring-0 text-on-surface-variant min-w-[120px]">
+<option>All Cameras</option>
+<option>CAM-08</option>
+<option>CAM-12</option>
+</select>
+<select class="bg-white border border-[#DFE1E6] rounded px-2 py-1.5 text-sm focus:border-primary-container focus:ring-0 text-on-surface-variant min-w-[120px]">
+<option>All Types</option>
+<option>Car</option>
+<option>SUV</option>
+<option>Bus</option>
+</select>
+</div>
+<!-- Table -->
+<div class="overflow-x-auto flex-1">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-lowest border-b border-outline-variant text-[12px] text-on-surface-variant uppercase tracking-wider font-semibold sticky top-0">
+<tr>
+<th class="px-4 py-3 font-semibold">Plate Number</th>
+<th class="px-4 py-3 font-semibold">Vehicle Type</th>
+<th class="px-4 py-3 font-semibold">Camera</th>
+<th class="px-4 py-3 font-semibold">Time</th>
+<th class="px-4 py-3 font-semibold">OCR Confidence</th>
+<th class="px-4 py-3 font-semibold">Status</th>
+</tr>
+</thead>
+<tbody class="text-sm divide-y divide-outline-variant/50 font-mono-md">
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer bg-primary-container/5">
+<td class="px-4 py-3 flex items-center gap-3">
+<div class="w-12 h-6 bg-gray-200 border border-gray-300 rounded overflow-hidden flex-shrink-0">
+<div class="bg-cover bg-center w-full h-full" data-alt="Tight macro crop of a silver car's license plate reading MP09AB1234, slightly grainy CCTV aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCX6xT4bKFUqggpxosUnKiqiMZB7Sg0-s01U43l_ouqaYC5y3ECOmRMnhdr8x8TyD-r7XJ7ZgstPr9CV2bgLgFac9ALGee9zSJAEIhsnlIivfAJNlQ-PW-Omwhctt60aY9mtopnUktTpV1nI9rRGXQOMe6TDCCyUqkwT1W08btDqSpS_DNIBvz7MnJ5OFDivdUyO9CKCZPwoBKgqmTH_bTvpRa_HO8T6IBWLyl0sgSjbg1BeiJaEKql')"></div>
+</div>
+<span class="font-bold text-on-surface">MP09AB1234</span>
+</td>
+<td class="px-4 py-3 text-on-surface-variant">SUV</td>
+<td class="px-4 py-3 text-on-surface-variant">CAM-08</td>
+<td class="px-4 py-3 text-on-surface-variant">14:35:22</td>
+<td class="px-4 py-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">
+                                                98% (High)
+                                            </span>
+</td>
+<td class="px-4 py-3">
+<span class="text-xs text-on-surface font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary-container">verified</span> Verified
+                                            </span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer">
+<td class="px-4 py-3 flex items-center gap-3">
+<div class="w-12 h-6 bg-gray-200 border border-gray-300 rounded overflow-hidden flex-shrink-0">
+<div class="bg-cover bg-center w-full h-full" data-alt="Tight macro crop of a dark blue car's license plate reading KA01XY5678, slightly grainy CCTV aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD3FJ-Z5Fn3E99Bd-lMlo1TMNVeaC6bjgwLdg6HAjvMTCf11KwKUv3_5AqxbbtIBKXDyvRRggHh4rsEYSbR_9d-yQ3esNi0Zbw06xnJ1Wz3P9ckGhcwp8YY9hjs-Zg4IMkY03pUycO3gAoV4V33xWc6nSovaOf3FIJrMvCF8eueQcLaLN2nNGyXRs9naFNY66lKMzmTx4gxMCe-7Zezo3wooPHHI_WHHF_my2beh0bk1OedJOYNnTSn')"></div>
+</div>
+<span class="font-bold text-on-surface">KA01XY5678</span>
+</td>
+<td class="px-4 py-3 text-on-surface-variant">Sedan</td>
+<td class="px-4 py-3 text-on-surface-variant">CAM-08</td>
+<td class="px-4 py-3 text-on-surface-variant">14:35:19</td>
+<td class="px-4 py-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">
+                                                94% (High)
+                                            </span>
+</td>
+<td class="px-4 py-3">
+<span class="text-xs text-on-surface font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-outline">pending</span> Pending
+                                            </span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer">
+<td class="px-4 py-3 flex items-center gap-3">
+<div class="w-12 h-6 bg-gray-200 border border-gray-300 rounded overflow-hidden flex-shrink-0">
+<div class="bg-cover bg-center w-full h-full" data-alt="Blurry macro crop of a yellow taxi's license plate, partially obscured, reading MH02... blurry CCTV aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCELk6eDg4dDWy0AVSmwRrDchz7opGkdjgwiHryJg9qDa4j61EmI7myRHMDnYpFfv78Wvr5Jg6vb9rFMseWFgs-bFhr-jqb3TNYiQIRvxITA34KHsBCsG4IFH95nkHFqOY6BjbYkNnq5aL6esMKaXumah2asRHHW9YRfRkNPcv0cukAezmFeZjEkukIXQvIwwgivtOTY7wCICLKBULxD3Xsm4mP6ZFSGHrSh3xi4whcrcIXQ5RxE33s')"></div>
+</div>
+<span class="font-bold text-on-surface">MH02--45</span>
+</td>
+<td class="px-4 py-3 text-on-surface-variant">Taxi</td>
+<td class="px-4 py-3 text-on-surface-variant">CAM-08</td>
+<td class="px-4 py-3 text-on-surface-variant">14:34:55</td>
+<td class="px-4 py-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-100 text-amber-800 border border-amber-200">
+                                                62% (Low)
+                                            </span>
+</td>
+<td class="px-4 py-3">
+<span class="text-xs font-medium text-error flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">flag</span> Flagged
+                                            </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Right Column (Detail Panel) -->
+<div class="lg:col-span-4 flex flex-col">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg shadow-sm h-full flex flex-col sticky top-[80px]">
+<div class="px-4 py-3 border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest rounded-t-lg">
+<h3 class="font-headline-md text-[16px] font-semibold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-primary-container">info</span>
+                                Current Detection
+                            </h3>
+</div>
+<div class="p-4 flex-1 flex flex-col gap-6 overflow-y-auto">
+<!-- Image Crop -->
+<div class="flex flex-col gap-2">
+<span class="text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Captured Plate</span>
+<div class="w-full h-32 bg-gray-100 border border-[#DFE1E6] rounded-md overflow-hidden relative shadow-inner">
+<div class="bg-cover bg-center w-full h-full" data-alt="Highly detailed macro shot of an Indian license plate reading MP09AB1234 on a silver vehicle. The image is a sharp crop from a traffic camera." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCw-oTw4DeNwb8wEq2Ufrp0EQjRTJv9VVzpNZwgV29RoyI9KFEqC-RXtNUfePlTWxRQO9WVy9hoz6Jy0q5FCUeKCpqyQFH942XbKTlF-m6wEAN2neXShzIVteu0fClQdCGhNU9OQbcfbSCjxJPBDMawakTviNld3U5NIKjkvC8aPnzjEW_TiCGhuMac6MSNtgNU3h_gEQWGvjh5V0GgoOBq8ALeSHBP93-09OZsbxIJuhqrHQ7n2Tcp')"></div>
+<div class="absolute inset-0 border-2 border-[#00ff00]/50 m-2 rounded"></div>
+</div>
+</div>
+<!-- OCR Result -->
+<div class="flex flex-col gap-1 items-center bg-[#FAFBFC] p-4 rounded-md border border-[#DFE1E6]">
+<span class="text-xs font-semibold text-on-surface-variant uppercase tracking-wider mb-1">OCR Result</span>
+<span class="font-mono-md text-3xl font-bold tracking-widest text-on-surface">MP09AB1234</span>
+</div>
+<!-- Metrics Grid -->
+<div class="grid grid-cols-2 gap-4">
+<div class="flex flex-col p-3 rounded-md bg-emerald-50 border border-emerald-100">
+<span class="text-[11px] font-semibold text-emerald-800 uppercase tracking-wider mb-1">OCR Confidence</span>
+<div class="flex items-end gap-2">
+<span class="font-mono-md text-xl font-bold text-emerald-900">98%</span>
+<span class="text-xs font-medium text-emerald-700 mb-1">High</span>
+</div>
+</div>
+<div class="flex flex-col p-3 rounded-md bg-blue-50 border border-blue-100">
+<span class="text-[11px] font-semibold text-blue-800 uppercase tracking-wider mb-1">Detection Conf.</span>
+<div class="flex items-end gap-2">
+<span class="font-mono-md text-xl font-bold text-blue-900">99%</span>
+</div>
+</div>
+</div>
+<hr class="border-outline-variant border-dashed"/>
+<!-- Metadata -->
+<div class="flex flex-col gap-3">
+<span class="text-xs font-semibold text-on-surface-variant uppercase tracking-wider">Metadata</span>
+<ul class="space-y-2 text-sm">
+<li class="flex justify-between border-b border-outline-variant/30 pb-1">
+<span class="text-on-surface-variant">Vehicle Type</span>
+<span class="font-medium text-on-surface">SUV</span>
+</li>
+<li class="flex justify-between border-b border-outline-variant/30 pb-1">
+<span class="text-on-surface-variant">Color</span>
+<span class="font-medium text-on-surface">Silver</span>
+</li>
+<li class="flex justify-between border-b border-outline-variant/30 pb-1">
+<span class="text-on-surface-variant">Location</span>
+<span class="font-medium text-on-surface">Wright Town Circle (CAM-08)</span>
+</li>
+<li class="flex justify-between pb-1">
+<span class="text-on-surface-variant">Timestamp</span>
+<span class="font-mono-md font-medium text-on-surface">2024-05-21 14:35:22</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Actions Footer -->
+<div class="p-4 border-t border-outline-variant bg-[#FAFBFC] rounded-b-lg flex flex-col gap-3 mt-auto">
+<button class="w-full bg-[#DE350B] hover:bg-red-700 text-white font-medium py-2 px-4 rounded transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">flag</span> Flag Vehicle
+                            </button>
+<button class="w-full bg-surface-container-lowest border border-primary-container text-primary-container hover:bg-primary-container/5 font-medium py-2 px-4 rounded transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">history</span> View History
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
