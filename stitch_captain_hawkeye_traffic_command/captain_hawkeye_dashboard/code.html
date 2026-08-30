@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Traffic Command Center - Captain Hawkeye</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#34476a",
+                        "tertiary": "#7b2600",
+                        "inverse-surface": "#2e3038",
+                        "surface-container": "#ededf8",
+                        "surface-container-highest": "#e1e2ec",
+                        "on-primary-fixed": "#001848",
+                        "on-secondary-fixed": "#041b3c",
+                        "on-surface": "#191b23",
+                        "on-primary-fixed-variant": "#0040a2",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e7e7f2",
+                        "on-tertiary-fixed-variant": "#812800",
+                        "on-tertiary-container": "#ffc6b2",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#bfd2fd",
+                        "background": "#faf8ff",
+                        "on-error": "#ffffff",
+                        "outline": "#737685",
+                        "surface-bright": "#faf8ff",
+                        "tertiary-container": "#a33500",
+                        "on-primary-container": "#c4d2ff",
+                        "on-background": "#191b23",
+                        "primary-fixed": "#dae2ff",
+                        "primary": "#003d9b",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#434654",
+                        "on-primary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f3f3fd",
+                        "secondary-fixed-dim": "#b4c7f1",
+                        "tertiary-fixed-dim": "#ffb59b",
+                        "secondary-fixed": "#d7e2ff",
+                        "surface": "#faf8ff",
+                        "inverse-primary": "#b2c5ff",
+                        "primary-fixed-dim": "#b2c5ff",
+                        "primary-container": "#0052cc",
+                        "outline-variant": "#c3c6d6",
+                        "inverse-on-surface": "#f0f0fb",
+                        "secondary": "#4c5e83",
+                        "on-secondary-container": "#475a7e",
+                        "surface-dim": "#d9d9e4",
+                        "surface-tint": "#0c56d0",
+                        "on-tertiary-fixed": "#380d00",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e1e2ec",
+                        "tertiary-fixed": "#ffdbcf",
+                        // Custom additions based on Style Guidance
+                        "bg-level-0": "#F4F5F7",
+                        "brand-blue": "#0052CC",
+                        "brand-red": "#DE350B",
+                        "brand-green": "#00875A",
+                        "text-primary-dark": "#172B4D",
+                        "input-bg": "#FAFBFC",
+                        "input-border": "#DFE1E6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-padding": "24px",
+                        "gutter": "16px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "stack-lg": "24px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "mono-md": ["JetBrains Mono"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "mono-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+                    },
+                    boxShadow: {
+                        'card-level-1': '0 2px 4px rgba(9, 30, 66, 0.08)',
+                        'card-level-2': '0 8px 16px rgba(9, 30, 66, 0.12)',
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-bg-level-0 font-body-md text-body-md text-on-surface h-screen overflow-hidden flex">
+<!-- SideNavBar (Predicted Component) -->
+<nav class="bg-surface dark:bg-inverse-surface fixed left-0 top-0 h-full w-60 border-r border-outline-variant dark:border-outline flex flex-col h-full py-stack-lg z-20 transition-all duration-300 hidden md:flex shrink-0">
+<div class="px-container-padding mb-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="shield">shield</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary tracking-tight">Hawkeye</h1>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider text-[10px]">City Command</p>
+</div>
+</div>
+</div>
+<ul class="flex-1 overflow-y-auto px-4 space-y-1">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary dark:text-inverse-primary font-bold border-r-2 border-primary bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-on-surface-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+<span>ANPR & OCR</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-on-surface-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+<span>Vehicle Tracking</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-on-surface-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span>Live Map</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-on-surface-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span>Traffic Analytics</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-on-surface-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+<span>Alerts</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-on-surface-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span>Reports</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-on-surface-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col md:ml-60 h-full overflow-hidden">
+<!-- TopAppBar (Predicted Component) -->
+<header class="bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline flex justify-between items-center h-16 px-container-padding z-10 shrink-0">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-on-surface">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface dark:text-inverse-on-surface">Traffic Command Center</h2>
+</div>
+<div class="flex items-center gap-gutter">
+<!-- Search -->
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant text-sm" data-icon="search">search</span>
+<input class="bg-input-bg border-2 border-input-border rounded pl-10 pr-4 py-1.5 text-sm focus:border-brand-blue focus:ring-0 transition-colors w-64 placeholder:text-outline-variant font-body-md" placeholder="Global Search..." type="text"/>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-outline-variant text-xs font-mono bg-surface-variant px-1 rounded">⌘K</span>
+</div>
+<div class="flex items-center gap-2 border-l border-outline-variant pl-4 ml-2">
+<button class="p-2 rounded-full text-on-surface-variant hover:bg-surface-container-low transition-all duration-150 relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-brand-red rounded-full border-2 border-surface"></span>
+</button>
+<button class="p-2 rounded-full text-on-surface-variant hover:bg-surface-container-low transition-all duration-150">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-variant border border-outline-variant overflow-hidden ml-2">
+<img alt="Operator Profile" class="w-full h-full object-cover" data-alt="A small, professional headshot portrait of an urban traffic control operator wearing a headset, set against a neutral gray background. Soft, even studio lighting. The operator looks focused and alert. Clean, corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPOnjdR8ZJM3ttHI6kevG-vOBGOj1jktHUQ2ABVfKRMgoQqverSmWVir-vz6gSdENllQ4vouFz4npvFWmKlUgLq4_MO4LNoQoXop8JEJ-ijSZoG-_6UdIvCpaB8BXh9UXzEhVOsnJEQyqAv0yUjNh9nnj4KoiT6LXiOV1UtyZ83uC8TVxdQBQeqDKP3XYy2m5iEVP0PZR2Sy8D5sQAzuwGWy7u7IQG05ujKPcA6TCPW4zma5cgMdDK"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Scrollable Dashboard Content -->
+<main class="flex-1 overflow-y-auto p-container-padding">
+<div class="max-w-7xl mx-auto space-y-gutter pb-8">
+<!-- 1. Summary Stats (4 Cards) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Card 1 -->
+<div class="bg-surface rounded-lg border border-outline-variant shadow-card-level-1 p-4 hover:shadow-card-level-2 transition-shadow duration-200">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-body-md text-text-primary-dark font-semibold">Total Vehicles</h3>
+<span class="material-symbols-outlined text-primary bg-primary-fixed p-1.5 rounded" data-icon="directions_car">directions_car</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-display-lg text-on-surface">12,450</span>
+</div>
+<p class="text-xs text-on-surface-variant mt-1">Today's detected vehicles</p>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface rounded-lg border border-outline-variant shadow-card-level-1 p-4 hover:shadow-card-level-2 transition-shadow duration-200">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-body-md text-text-primary-dark font-semibold">Active Cameras</h3>
+<span class="material-symbols-outlined text-primary bg-primary-fixed p-1.5 rounded" data-icon="videocam">videocam</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-display-lg text-on-surface">42</span>
+<span class="text-xs text-brand-green font-medium flex items-center"><span class="material-symbols-outlined text-[14px]" data-icon="arrow_upward">arrow_upward</span> 2</span>
+</div>
+<p class="text-xs text-on-surface-variant mt-1">Online cameras</p>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface rounded-lg border border-outline-variant shadow-card-level-1 p-4 hover:shadow-card-level-2 transition-shadow duration-200">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-body-md text-text-primary-dark font-semibold">Traffic Congestion</h3>
+<span class="material-symbols-outlined text-tertiary-container bg-tertiary-fixed p-1.5 rounded" data-icon="traffic">traffic</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-display-lg text-on-surface">18%</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-1.5 mt-2">
+<div class="bg-tertiary-container h-1.5 rounded-full" style="width: 18%"></div>
+</div>
+<p class="text-xs text-on-surface-variant mt-1">Current city congestion</p>
+</div>
+<!-- Card 4 (Alert Highlight) -->
+<div class="bg-surface rounded-lg border border-brand-red/30 shadow-card-level-1 p-4 hover:shadow-card-level-2 transition-shadow duration-200 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-16 h-16 bg-brand-red/10 rounded-bl-full -mr-4 -mt-4"></div>
+<div class="flex justify-between items-start mb-2 relative z-10">
+<h3 class="font-body-md text-text-primary-dark font-semibold">Active Alerts</h3>
+<span class="material-symbols-outlined text-brand-red bg-error-container p-1.5 rounded" data-icon="warning">warning</span>
+</div>
+<div class="flex items-baseline gap-2 relative z-10">
+<span class="font-display-lg text-display-lg text-brand-red">7</span>
+</div>
+<p class="text-xs text-brand-red font-medium mt-1 relative z-10 flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-brand-red animate-pulse"></span> Requires attention
+                        </p>
+</div>
+</div>
+<!-- Grid Layout for Main Content -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- 2. Main Map Section (Spans 8 cols on desktop) -->
+<div class="lg:col-span-8 bg-surface rounded-lg border border-outline-variant shadow-card-level-1 flex flex-col min-h-[500px]">
+<div class="px-4 py-3 border-b border-outline-variant flex justify-between items-center bg-surface">
+<h3 class="font-body-md text-text-primary-dark font-semibold">Live City Overview</h3>
+<div class="flex gap-2">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-surface-variant text-xs font-medium text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-brand-blue"></span> Normal</span>
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-surface-variant text-xs font-medium text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-[#FF991F]"></span> Moderate</span>
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-surface-variant text-xs font-medium text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-brand-red"></span> High</span>
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-surface-variant text-xs font-medium text-on-surface-variant"><span class="material-symbols-outlined text-[14px]" data-icon="videocam">videocam</span> CCTV</span>
+</div>
+</div>
+<div class="flex-1 relative bg-surface-variant overflow-hidden rounded-b-lg group">
+<!-- Using the requested placeholder image -->
+<img alt="City Map View" class="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-[1.02]" data-location="City Center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_TIrUoEaBftOmc0ANvKoN4Af-RwYHqhIXXZl4wq3g6eSf9VTclfBlu8b2uXynoL11kydcvy8w6xztMscCersEdllra8NJ0qJ_Db0mZxcNEoc97W6A_L8zPTJ0ibLA9EHp3O5qRdsJ8ngyv1KbU51o8a1a-PQGdA2bDVUf1CzbBtOAfOAGIIh55MkwsdTqQNq_X6B7xTmk4uiafAoqHAAUYudWCzYI4sE_M7WOHk1_rLjSIZaIqJcG"/>
+<!-- Map Controls -->
+<div class="absolute bottom-4 right-4 flex flex-col gap-2">
+<div class="bg-surface rounded border border-outline-variant shadow-sm flex flex-col overflow-hidden">
+<button class="p-2 text-on-surface hover:bg-surface-container-low transition-colors border-b border-outline-variant" title="Zoom In">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+<button class="p-2 text-on-surface hover:bg-surface-container-low transition-colors" title="Zoom Out">
+<span class="material-symbols-outlined" data-icon="remove">remove</span>
+</button>
+</div>
+<button class="bg-surface rounded border border-outline-variant shadow-sm p-2 text-on-surface hover:bg-surface-container-low transition-colors" title="Re-center">
+<span class="material-symbols-outlined" data-icon="my_location">my_location</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Right Column (Spans 4 cols on desktop) -->
+<div class="lg:col-span-4 flex flex-col gap-gutter">
+<!-- 5. Vehicle Search Area -->
+<div class="bg-surface rounded-lg border border-outline-variant shadow-card-level-1 p-4">
+<h3 class="font-body-md text-text-primary-dark font-semibold border-b border-outline-variant pb-2 mb-3">Vehicle Tracking</h3>
+<div class="space-y-3">
+<div>
+<label class="block text-xs font-medium text-on-surface-variant mb-1">Enter number plate</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant text-sm" data-icon="search">search</span>
+<input class="w-full bg-input-bg border-2 border-input-border rounded pl-9 pr-3 py-2 text-sm focus:border-brand-blue focus:ring-0 uppercase font-mono-md text-on-surface" placeholder="e.g., MP09AB1234" type="text"/>
+</div>
+</div>
+<button class="w-full bg-brand-blue text-on-primary rounded py-2 text-sm font-semibold hover:bg-primary-fixed-variant transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="track_changes">track_changes</span>
+                                    Track Vehicle
+                                </button>
+</div>
+</div>
+<!-- 3. Live Alerts Panel -->
+<div class="bg-surface rounded-lg border border-outline-variant shadow-card-level-1 flex flex-col flex-1 min-h-[250px]">
+<div class="px-4 py-3 border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-body-md text-text-primary-dark font-semibold">Live Alerts</h3>
+<span class="bg-error-container text-on-error-container text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">High Priority</span>
+</div>
+<div class="p-0 flex-1 overflow-y-auto">
+<ul class="divide-y divide-outline-variant">
+<li class="p-4 hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-1">
+<span class="font-mono-md text-sm font-semibold text-on-surface">MP09AB1234</span>
+<span class="text-xs text-on-surface-variant font-mono-md">10:37 AM</span>
+</div>
+<div class="flex items-center gap-1 text-xs text-on-surface-variant mb-2">
+<span class="material-symbols-outlined text-[14px]" data-icon="location_on">location_on</span>
+                                            Wright Town Circle
+                                        </div>
+<div class="flex justify-between items-center">
+<span class="text-xs font-medium text-on-surface">Fine Due</span>
+<span class="inline-flex items-center gap-1 bg-[#FFEBE6] text-brand-red px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-brand-red"></span> Active
+                                            </span>
+</div>
+</li>
+<li class="p-4 hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-1">
+<span class="font-mono-md text-sm font-semibold text-on-surface">KA01XY5678</span>
+<span class="text-xs text-on-surface-variant font-mono-md">10:45 AM</span>
+</div>
+<div class="flex items-center gap-1 text-xs text-on-surface-variant mb-2">
+<span class="material-symbols-outlined text-[14px]" data-icon="location_on">location_on</span>
+                                            MG Road
+                                        </div>
+<div class="flex justify-between items-center">
+<span class="text-xs font-medium text-on-surface">Speeding</span>
+<span class="inline-flex items-center gap-1 bg-[#FFEBE6] text-brand-red px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-brand-red"></span> Active
+                                            </span>
+</div>
+</li>
+</ul>
+</div>
+<div class="p-3 border-t border-outline-variant bg-surface-container-lowest rounded-b-lg">
+<button class="w-full text-brand-blue text-sm font-medium hover:underline flex justify-center items-center gap-1">
+                                    View All Alerts <span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- 4. Traffic Hotspots Panel (Full width row) -->
+<div class="bg-surface rounded-lg border border-outline-variant shadow-card-level-1">
+<div class="px-4 py-3 border-b border-outline-variant">
+<h3 class="font-body-md text-text-primary-dark font-semibold">Traffic Hotspots Overview</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-outline-variant">
+<div class="p-4 flex items-center justify-between hover:bg-surface-container-low transition-colors">
+<div>
+<h4 class="font-body-md font-medium text-on-surface mb-1">Wright Town Circle</h4>
+<div class="flex items-center gap-3 text-xs text-on-surface-variant font-mono-md">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]" data-icon="directions_car">directions_car</span> 340</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]" data-icon="speed">speed</span> 18.4 km/h</span>
+</div>
+</div>
+<div class="text-right">
+<span class="inline-block px-2 py-1 bg-[#FFEBE6] text-brand-red rounded text-xs font-bold uppercase tracking-wider">High</span>
+</div>
+</div>
+<div class="p-4 flex items-center justify-between hover:bg-surface-container-low transition-colors">
+<div>
+<h4 class="font-body-md font-medium text-on-surface mb-1">Civil Lines</h4>
+<div class="flex items-center gap-3 text-xs text-on-surface-variant font-mono-md">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]" data-icon="directions_car">directions_car</span> 120</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]" data-icon="speed">speed</span> 42.1 km/h</span>
+</div>
+</div>
+<div class="text-right">
+<span class="inline-block px-2 py-1 bg-[#E3FCEF] text-brand-green rounded text-xs font-bold uppercase tracking-wider">Normal</span>
+</div>
+</div>
+<!-- Empty placeholder for layout balance -->
+<div class="p-4 flex items-center justify-center text-on-surface-variant bg-surface-container-lowest hidden lg:flex">
+<span class="text-sm italic">Monitoring other sectors...</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

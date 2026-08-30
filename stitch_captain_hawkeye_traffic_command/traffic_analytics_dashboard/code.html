@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Traffic Analytics - Traffic Command Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-container": "#ffc6b2",
+                        "on-secondary-container": "#475a7e",
+                        "on-secondary-fixed-variant": "#34476a",
+                        "outline-variant": "#c3c6d6",
+                        "tertiary-container": "#a33500",
+                        "on-surface-variant": "#434654",
+                        "primary-fixed-dim": "#b2c5ff",
+                        "inverse-surface": "#2e3038",
+                        "on-background": "#191b23",
+                        "primary-fixed": "#dae2ff",
+                        "surface-container-high": "#e7e7f2",
+                        "on-secondary-fixed": "#041b3c",
+                        "tertiary": "#7b2600",
+                        "surface-bright": "#faf8ff",
+                        "surface": "#faf8ff",
+                        "surface-container-highest": "#e1e2ec",
+                        "primary": "#003d9b",
+                        "secondary-container": "#bfd2fd",
+                        "surface-variant": "#e1e2ec",
+                        "secondary-fixed-dim": "#b4c7f1",
+                        "on-primary-container": "#c4d2ff",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#380d00",
+                        "secondary": "#4c5e83",
+                        "on-primary-fixed-variant": "#0040a2",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#001848",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#812800",
+                        "on-surface": "#191b23",
+                        "tertiary-fixed": "#ffdbcf",
+                        "surface-container-low": "#f3f3fd",
+                        "outline": "#737685",
+                        "inverse-on-surface": "#f0f0fb",
+                        "on-error-container": "#93000a",
+                        "background": "#faf8ff",
+                        "surface-tint": "#0c56d0",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#b2c5ff",
+                        "tertiary-fixed-dim": "#ffb59b",
+                        "primary-container": "#0052cc",
+                        "secondary-fixed": "#d7e2ff",
+                        "surface-dim": "#d9d9e4",
+                        "on-error": "#ffffff",
+                        "surface-container": "#ededf8"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        unit: "4px",
+                        gutter: "16px",
+                        "stack-lg": "24px",
+                        "container-padding": "24px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px"
+                    },
+                    fontFamily: {
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "mono-md": ["JetBrains Mono"]
+                    },
+                    fontSize: {
+                        "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "600" }],
+                        "headline-lg": ["24px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "600" }],
+                        "headline-md": ["20px", { lineHeight: "28px", fontWeight: "600" }],
+                        "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "display-lg": ["36px", { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "mono-md": ["14px", { lineHeight: "20px", fontWeight: "500" }]
+                    },
+                    boxShadow: {
+                        'level-1': '0 2px 4px rgba(9, 30, 66, 0.08)',
+                        'level-2': '0 8px 16px rgba(9, 30, 66, 0.12)'
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { background-color: #F4F5F7; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .card { background-color: #FFFFFF; border: 1px solid #EBECF0; box-shadow: 0 2px 4px rgba(9, 30, 66, 0.08); border-radius: 8px; }
+        .btn-primary { background-color: #0052CC; color: white; border-radius: 4px; padding: 8px 16px; font-weight: 500; font-size: 14px; }
+        .btn-secondary { background-color: transparent; border: 1px solid #0052CC; color: #0052CC; border-radius: 4px; padding: 8px 16px; font-weight: 500; font-size: 14px; }
+        .input-field { background-color: #FAFBFC; border: 2px solid #DFE1E6; border-radius: 4px; padding: 8px 12px; font-size: 14px; color: #172B4D; transition: border-color 0.2s; }
+        .input-field:focus { border-color: #0052CC; outline: none; }
+    </style>
+<!-- Chart.js for rendering beautiful, clean charts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="font-body-md text-on-surface antialiased h-screen overflow-hidden flex">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-full w-60 bg-surface dark:bg-inverse-surface border-r border-outline-variant dark:border-outline flex flex-col py-stack-lg z-20">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary">Hawkeye</h1>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1">City Command</p>
+</div>
+<div class="flex-1 overflow-y-auto">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center px-6 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-on-surface-variant transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined mr-4 group-hover:text-primary">dashboard</span>
+<span class="font-body-md text-body-md font-medium">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-6 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-on-surface-variant transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined mr-4 group-hover:text-primary">visibility</span>
+<span class="font-body-md text-body-md font-medium">ANPR &amp; OCR</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-6 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-on-surface-variant transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined mr-4 group-hover:text-primary">local_shipping</span>
+<span class="font-body-md text-body-md font-medium">Vehicle Tracking</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-6 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-on-surface-variant transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined mr-4 group-hover:text-primary">map</span>
+<span class="font-body-md text-body-md font-medium">Live Map</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-6 py-3 text-primary dark:text-inverse-primary font-bold border-r-2 border-primary bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-4" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-body-md text-body-md">Traffic Analytics</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-6 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-on-surface-variant transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined mr-4 group-hover:text-primary">notifications_active</span>
+<span class="font-body-md text-body-md font-medium">Alerts</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-6 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-on-surface-variant transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined mr-4 group-hover:text-primary">description</span>
+<span class="font-body-md text-body-md font-medium">Reports</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-6 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-on-surface-variant transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined mr-4 group-hover:text-primary">settings</span>
+<span class="font-body-md text-body-md font-medium">Settings</span>
+</a>
+</li>
+</ul>
+</div>
+<div class="px-6 mt-auto">
+<div class="flex items-center">
+<img class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A small circular avatar profile picture of a professional operator in a command center, modern aesthetic, clean lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBle-3z8ahutAwc6MBrdBWHPYhYlIzcnC8_LSKqOy3CBqpd95OOw-iMKmSXFOTBtVr3Ch7VlCc7spYtU6xf8vmOAmGMbxvE-E7pgrRKuluZJ4QFGVCiBFncAPtQ_nlyBrUMrC0UCKYqYDO5SQKHHLRHDjymiHzErqRqr8kmQGO5pVpEvWJGSkWoF1Z75vHRzfcuKR1wmq3GpzIl-Eqa56N5IW9OyMysOIYyVefRzjG4Xy6JSjwIAhY2"/>
+<div class="ml-3">
+<p class="font-label-md text-label-md font-semibold text-on-surface">Operator 04</p>
+<p class="font-label-md text-[10px] text-on-surface-variant">Active</p>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col ml-60 h-screen overflow-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline flex justify-between items-center h-16 px-container-padding z-10 shrink-0">
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface dark:text-inverse-on-surface">Traffic Command Center</h2>
+<div class="flex items-center gap-4">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="input-field pl-10 w-64 h-9" placeholder="Search analytics (CMD+K)..." type="text"/>
+</div>
+<button class="w-10 h-10 rounded-full hover:bg-surface-container-low flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full hover:bg-surface-container-low flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">schedule</span>
+</button>
+</div>
+</header>
+<!-- Scrollable Canvas -->
+<main class="flex-1 overflow-y-auto p-container-padding bg-[#F4F5F7]">
+<!-- Page Header & Filters -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+<div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Analytics Overview</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Real-time insights and historical data analysis.</p>
+</div>
+<div class="flex flex-wrap items-center gap-3">
+<select class="input-field py-2 h-10">
+<option>Today</option>
+<option>Last 7 Days</option>
+<option>Last 30 Days</option>
+<option>Custom Range</option>
+</select>
+<select class="input-field py-2 h-10">
+<option>Location: All Areas</option>
+<option>North District</option>
+<option>South District</option>
+</select>
+<select class="input-field py-2 h-10">
+<option>Vehicle: All Types</option>
+<option>Cars</option>
+<option>Heavy Vehicles</option>
+</select>
+<button class="btn-secondary h-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">compare_arrows</span> Compare
+                    </button>
+<button class="btn-primary h-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">download</span> Export
+                    </button>
+</div>
+</div>
+<!-- Top KPIs -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter mb-6">
+<!-- KPI 1 -->
+<div class="card p-4 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Total Vehicles</span>
+<div class="w-8 h-8 rounded-full bg-primary-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[18px]">directions_car</span>
+</div>
+</div>
+<div>
+<div class="font-display-lg text-display-lg text-on-surface">84,250</div>
+<div class="flex items-center mt-1 text-sm font-medium" style="color: #00875A;">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span class="ml-1">+12% vs yesterday</span>
+</div>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="card p-4 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Average Speed</span>
+<div class="w-8 h-8 rounded-full bg-secondary-container/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-[18px]">speed</span>
+</div>
+</div>
+<div>
+<div class="font-display-lg text-display-lg text-on-surface">34.2 <span class="text-lg font-normal text-on-surface-variant">km/h</span></div>
+<div class="flex items-center mt-1 text-sm font-medium" style="color: #DE350B;">
+<span class="material-symbols-outlined text-[16px]">trending_down</span>
+<span class="ml-1">-5% vs yesterday</span>
+</div>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="card p-4 flex flex-col justify-between border-l-4 border-l-[#00875A]">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Congestion Level</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">traffic</span>
+</div>
+</div>
+<div>
+<div class="font-display-lg text-display-lg text-on-surface">22%</div>
+<div class="inline-flex items-center px-2 py-1 mt-1 rounded-full text-xs font-semibold bg-[#E3FCEF] text-[#006644]">
+                            Normal
+                        </div>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="card p-4 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Peak Traffic Time</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">schedule</span>
+</div>
+</div>
+<div>
+<div class="font-headline-md text-headline-md text-on-surface mt-2">09:30 AM</div>
+<div class="font-body-md text-body-md text-on-surface-variant mt-1">to 10:30 AM</div>
+</div>
+</div>
+</div>
+<!-- Bento Grid Layout for Main Content -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-6">
+<!-- Traffic Flow Chart (Spans 8 cols) -->
+<div class="card lg:col-span-8 flex flex-col h-[400px]">
+<div class="px-5 py-4 border-b border-[#EBECF0] flex justify-between items-center">
+<h4 class="font-headline-md text-[16px] text-on-surface font-semibold">Traffic Flow vs Time</h4>
+<button class="text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+<div class="p-5 flex-1 relative w-full h-full">
+<canvas id="trafficFlowChart"></canvas>
+</div>
+</div>
+<!-- Insights Panel (Spans 4 cols) -->
+<div class="card lg:col-span-4 flex flex-col h-[400px] overflow-hidden">
+<div class="px-5 py-4 border-b border-[#EBECF0] flex justify-between items-center bg-surface-container-lowest">
+<h4 class="font-headline-md text-[16px] text-on-surface font-semibold">Live Insights</h4>
+<span class="material-symbols-outlined text-primary text-[20px]">lightbulb</span>
+</div>
+<div class="p-5 flex-1 overflow-y-auto bg-surface-bright">
+<div class="mb-6">
+<h5 class="font-label-md text-[11px] text-on-surface-variant uppercase mb-3">Critical Congestion Points</h5>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 border border-[#EBECF0] rounded bg-white">
+<div class="flex items-center">
+<div class="w-2 h-2 rounded-full bg-[#DE350B] mr-3"></div>
+<div>
+<div class="font-body-md font-medium text-sm">Wright Town Circle</div>
+<div class="text-[11px] text-on-surface-variant">Avg Speed: 12 km/h</div>
+</div>
+</div>
+<span class="text-xs font-bold text-[#DE350B]">48%</span>
+</div>
+<div class="flex items-center justify-between p-3 border border-[#EBECF0] rounded bg-white">
+<div class="flex items-center">
+<div class="w-2 h-2 rounded-full bg-[#FF8B00] mr-3"></div>
+<div>
+<div class="font-body-md font-medium text-sm">MG Road Junction</div>
+<div class="text-[11px] text-on-surface-variant">Avg Speed: 24 km/h</div>
+</div>
+</div>
+<span class="text-xs font-bold text-[#FF8B00]">32%</span>
+</div>
+</div>
+</div>
+<div>
+<h5 class="font-label-md text-[11px] text-on-surface-variant uppercase mb-3">Peak Hour Analysis</h5>
+<div class="bg-surface-container p-4 rounded text-sm">
+<div class="flex items-start mb-2">
+<span class="material-symbols-outlined text-primary text-[16px] mr-2 mt-0.5">info</span>
+<p class="text-on-surface-variant leading-tight">Morning peak observed between <strong>9:00 AM - 11:00 AM</strong>. Expect secondary peak around <strong>5:00 PM</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Row Charts -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Vehicle Type Distribution (4 cols) -->
+<div class="card lg:col-span-4 flex flex-col h-[320px]">
+<div class="px-5 py-4 border-b border-[#EBECF0]">
+<h4 class="font-headline-md text-[16px] text-on-surface font-semibold">Vehicle Distribution</h4>
+</div>
+<div class="p-5 flex-1 relative flex items-center justify-center">
+<div class="w-full h-full max-h-[220px]">
+<canvas id="vehicleTypeChart"></canvas>
+</div>
+</div>
+</div>
+<!-- Hourly Traffic Volume (8 cols) -->
+<div class="card lg:col-span-8 flex flex-col h-[320px]">
+<div class="px-5 py-4 border-b border-[#EBECF0]">
+<h4 class="font-headline-md text-[16px] text-on-surface font-semibold">Hourly Traffic Volume</h4>
+</div>
+<div class="p-5 flex-1 relative w-full h-full">
+<canvas id="hourlyVolumeChart"></canvas>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Chart Initializations -->
+<script>
+        // Common Chart Options for Clean UI
+        Chart.defaults.font.family = 'Inter';
+        Chart.defaults.color = '#434654';
+        Chart.defaults.plugins.tooltip.backgroundColor = '#172B4D';
+        Chart.defaults.plugins.tooltip.titleFont = { size: 13, family: 'Inter', weight: 'bold' };
+        Chart.defaults.plugins.tooltip.bodyFont = { size: 12, family: 'Inter' };
+        Chart.defaults.plugins.tooltip.padding = 10;
+        Chart.defaults.plugins.tooltip.cornerRadius = 4;
+        Chart.defaults.plugins.tooltip.displayColors = false;
+
+        // 1. Traffic Flow Line Chart
+        const ctxFlow = document.getElementById('trafficFlowChart').getContext('2d');
+        
+        // Create Gradient for line chart
+        let gradientFlow = ctxFlow.createLinearGradient(0, 0, 0, 400);
+        gradientFlow.addColorStop(0, 'rgba(0, 82, 204, 0.2)');
+        gradientFlow.addColorStop(1, 'rgba(0, 82, 204, 0.0)');
+
+        new Chart(ctxFlow, {
+            type: 'line',
+            data: {
+                labels: ['00:00', '02:00', '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'],
+                datasets: [{
+                    label: 'Vehicle Volume',
+                    data: [1200, 800, 1500, 4500, 9800, 11000, 7500, 8200, 9500, 10500, 6000, 3000],
+                    borderColor: '#0052CC',
+                    backgroundColor: gradientFlow,
+                    borderWidth: 2,
+                    pointBackgroundColor: '#FFFFFF',
+                    pointBorderColor: '#0052CC',
+                    pointBorderWidth: 2,
+                    pointRadius: 3,
+                    pointHoverRadius: 6,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: {
+                        grid: { display: false, drawBorder: false },
+                        ticks: { color: '#737685', font: { size: 11 } }
+                    },
+                    y: {
+                        grid: { color: '#EBECF0', drawBorder: false, borderDash: [5, 5] },
+                        ticks: { color: '#737685', font: { size: 11 }, maxTicksLimit: 6 }
+                    }
+                },
+                interaction: { mode: 'index', intersect: false }
+            }
+        });
+
+        // 2. Vehicle Type Donut Chart
+        const ctxType = document.getElementById('vehicleTypeChart').getContext('2d');
+        new Chart(ctxType, {
+            type: 'doughnut',
+            data: {
+                labels: ['Cars', 'Bikes', 'Trucks', 'Buses'],
+                datasets: [{
+                    data: [65, 20, 10, 5],
+                    backgroundColor: ['#0052CC', '#00B8D9', '#FF8B00', '#DE350B'],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '75%',
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            usePointStyle: true,
+                            boxWidth: 8,
+                            boxHeight: 8,
+                            padding: 20,
+                            font: { size: 12, family: 'Inter' }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 3. Hourly Volume Bar Chart
+        const ctxHourly = document.getElementById('hourlyVolumeChart').getContext('2d');
+        new Chart(ctxHourly, {
+            type: 'bar',
+            data: {
+                labels: ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'],
+                datasets: [{
+                    label: 'Volume',
+                    data: [1500, 3200, 7800, 11500, 10200, 8000, 7500, 7200, 7800, 8500, 9200, 11800, 10500, 6000],
+                    backgroundColor: '#B2C5FF',
+                    borderRadius: 4,
+                    hoverBackgroundColor: '#0052CC'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: {
+                        grid: { display: false, drawBorder: false },
+                        ticks: { color: '#737685', font: { size: 11 } }
+                    },
+                    y: {
+                        grid: { color: '#EBECF0', drawBorder: false },
+                        ticks: { display: false } // Hide Y axis ticks for cleaner look
+                    }
+                }
+            }
+        });
+    </script>
+</body></html>
