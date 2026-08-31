@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Plexis — City-Wide AI ANPR & Trajectory Command Center</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+  
+  <!-- Material Symbols Outlined -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  
+  <!-- Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="/app/styles.css" />
+  <!-- Fallback local relative path if served directly -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div id="app-container">
+    <!-- =======================================================================
+         SIDEBAR NAVIGATION
+         ======================================================================= -->
+    <aside class="sidebar">
+      <div class="brand-section">
+        <div class="brand-icon-box">P</div>
+        <div class="brand-info">
+          <h1>Plexis</h1>
+          <span class="sub-tag">Team Sovereigns &bull; SIH 2026</span>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <a class="nav-item active" id="nav-dashboard" onclick="navigate('dashboard')">
+          <span class="material-symbols-outlined">dashboard</span>
+          <span>Command Center</span>
+        </a>
+        <a class="nav-item" id="nav-map" onclick="navigate('map')">
+          <span class="material-symbols-outlined">map</span>
+          <span>Live Traffic Map</span>
+        </a>
+        <a class="nav-item" id="nav-trajectory" onclick="navigate('trajectory')">
+          <span class="material-symbols-outlined">alt_route</span>
+          <span>Trajectory Search</span>
+        </a>
+        <a class="nav-item" id="nav-anpr" onclick="navigate('anpr')">
+          <span class="material-symbols-outlined">videocam</span>
+          <span>ANPR Video Feeds</span>
+        </a>
+        <a class="nav-item" id="nav-analytics" onclick="navigate('analytics')">
+          <span class="material-symbols-outlined">analytics</span>
+          <span>Traffic Analytics</span>
+        </a>
+        <a class="nav-item" id="nav-reports" onclick="navigate('reports')">
+          <span class="material-symbols-outlined">description</span>
+          <span>Investigation Reports</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="status-badge">
+          <div class="pulse-dot"></div>
+          <div>
+            <div style="font-weight: 600; color: #fff;">Supabase Live DB</div>
+            <div style="font-size: 11px; color: var(--accent-emerald);" id="db-connection-status">Connected &bull; 10 Nodes Online</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- =======================================================================
+         MAIN VIEW WRAPPER
+         ======================================================================= -->
+    <main class="main-wrapper">
+      <!-- Top Header Bar -->
+      <header class="top-header">
+        <div class="header-title-box">
+          <h2 id="view-title">
+            <span class="material-symbols-outlined" style="color: var(--accent-cyan);">dashboard</span>
+            <span>City Traffic Command Center</span>
+          </h2>
+          <div class="subtitle" id="view-subtitle">Real-time multi-camera ANPR tracking & urban telemetry &bull; Jabalpur Smart City</div>
+        </div>
+
+        <div class="header-actions">
+          <div class="search-input-wrapper">
+            <span class="material-symbols-outlined search-icon">search</span>
+            <input type="text" id="global-plate-search" placeholder="Search plate (e.g. MP20AB1234)..." onkeydown="handleGlobalSearch(event)" />
+          </div>
+
+          <div class="clock-pill">
+            <span class="material-symbols-outlined" style="font-size: 16px;">schedule</span>
+            <span id="live-clock">--:--:-- UTC</span>
+          </div>
+
+          <button class="btn-refresh" onclick="refreshCurrentView()">
+            <span class="material-symbols-outlined" style="font-size: 16px;">refresh</span>
+            <span>Refresh</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- =====================================================================
+           VIEW 1: DASHBOARD
+           ===================================================================== -->
+      <section class="view-container active-view" id="view-dashboard">
+        <!-- KPI Metric Cards Grid -->
+        <div class="kpi-grid">
+          <div class="glass-card kpi-card cyan">
+            <div class="kpi-top">
+              <span class="kpi-label">Total Sightings</span>
+              <div class="kpi-icon"><span class="material-symbols-outlined">directions_car</span></div>
+            </div>
+            <div class="kpi-val" id="kpi-total-sightings">--</div>
+            <div class="kpi-sub positive">
+              <span class="material-symbols-outlined" style="font-size: 14px;">trending_up</span>
+              <span>Live database records</span>
+            </div>
+          </div>
+
+          <div class="glass-card kpi-card blue">
+            <div class="kpi-top">
+              <span class="kpi-label">Active CCTV Nodes</span>
+              <div class="kpi-icon"><span class="material-symbols-outlined">videocam</span></div>
+            </div>
+            <div class="kpi-val" id="kpi-active-cameras">10 / 10</div>
+            <div class="kpi-sub positive">
+              <span class="material-symbols-outlined" style="font-size: 14px;">check_circle</span>
+              <span>100% telemetry operational</span>
+            </div>
+          </div>
+
+          <div class="glass-card kpi-card amber">
+            <div class="kpi-top">
+              <span class="kpi-label">Congested Junctions</span>
+              <div class="kpi-icon"><span class="material-symbols-outlined">traffic</span></div>
+            </div>
+            <div class="kpi-val" id="kpi-congested-cameras">--</div>
+            <div class="kpi-sub warning">
+              <span class="material-symbols-outlined" style="font-size: 14px;">warning</span>
+              <span id="kpi-congested-sub">Rolling 30-min window</span>
+            </div>
+          </div>
+
+          <div class="glass-card kpi-card emerald">
+            <div class="kpi-top">
+              <span class="kpi-label">OCR Precision</span>
+              <div class="kpi-icon"><span class="material-symbols-outlined">verified</span></div>
+            </div>
+            <div class="kpi-val">96.8%</div>
+            <div class="kpi-sub positive">
+              <span class="material-symbols-outlined" style="font-size: 14px;">auto_fix_high</span>
+              <span>Positional correction enabled</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Layout: 2 Columns -->
+        <div class="dashboard-layout">
+          <!-- Left Column: Recent Sightings Feed Table -->
+          <div class="glass-card">
+            <div class="card-header">
+              <h3>
+                <span class="material-symbols-outlined" style="color: var(--accent-cyan);">history</span>
+                <span>Recent Vehicle Sightings</span>
+              </h3>
+              <span style="font-size: 12px; color: var(--text-muted);">Auto-refreshed via <code>/api/anpr/sightings/recent</code></span>
+            </div>
+            <div class="card-body" style="padding: 0;">
+              <div class="modern-table-container">
+                <table class="modern-table">
+                  <thead>
+                    <tr>
+                      <th>Plate Number</th>
+                      <th>Type</th>
+                      <th>Camera / Location</th>
+                      <th>Timestamp (UTC)</th>
+                      <th>Confidence</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recent-sightings-tbody">
+                    <tr><td colspan="6" style="text-align: center; padding: 24px; color: var(--text-muted);">Loading live sightings from Supabase...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Quick Trajectory & Top Cameras -->
+          <div style="display: flex; flex-direction: column; gap: 24px;">
+            <!-- Quick Trajectory Search Card -->
+            <div class="glass-card">
+              <div class="card-header">
+                <h3>
+                  <span class="material-symbols-outlined" style="color: var(--accent-blue);">search</span>
+                  <span>Instant Trajectory Lookup</span>
+                </h3>
+              </div>
+              <div class="card-body">
+                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Reconstruct vehicle journey across all 10 Jabalpur cameras with speed & compass bearings.</p>
+                <div style="display: flex; gap: 8px; margin-bottom: 14px;">
+                  <input type="text" id="dash-plate-input" placeholder="e.g. MP20AB1234" style="flex: 1; background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 8px 12px; color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 13px; outline: none;" />
+                  <button class="btn-primary" onclick="searchDashPlate()">Lookup</button>
+                </div>
+                <div style="font-size: 11.5px; color: var(--text-dim); margin-bottom: 6px;">QUICK SELECTION SAMPLES:</div>
+                <div class="quick-picks">
+                  <span class="plate-badge" onclick="quickSelectPlate('MP20AB1234')">MP20AB1234</span>
+                  <span class="plate-badge" onclick="quickSelectPlate('MP20CB5678')">MP20CB5678</span>
+                  <span class="plate-badge" onclick="quickSelectPlate('MP20EF9012')">MP20EF9012</span>
+                  <span class="plate-badge" onclick="quickSelectPlate('MP20GH3456')">MP20GH3456</span>
+                  <span class="plate-badge" onclick="quickSelectPlate('DL01AB1234')">DL01AB1234</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Top Camera Density Card -->
+            <div class="glass-card">
+              <div class="card-header">
+                <h3>
+                  <span class="material-symbols-outlined" style="color: var(--accent-emerald);">bar_chart</span>
+                  <span>Jabalpur Hotspots</span>
+                </h3>
+                <a onclick="navigate('map')" style="font-size: 12px; color: var(--accent-cyan); cursor: pointer; text-decoration: none;">View Map &rarr;</a>
+              </div>
+              <div class="card-body" id="dash-hotspots-container">
+                <div style="color: var(--text-muted); font-size: 13px;">Loading camera density metrics...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           VIEW 2: LIVE TRAFFIC MAP (LEAFLET HEATMAP)
+           ===================================================================== -->
+      <section class="view-container" id="view-map">
+        <div class="map-layout">
+          <!-- Left: Full Leaflet Map -->
+          <div class="glass-card map-card">
+            <div class="card-header">
+              <h3>
+                <span class="material-symbols-outlined" style="color: var(--accent-cyan);">location_on</span>
+                <span>Jabalpur CCTV Network & Traffic Heatmap</span>
+              </h3>
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="display: flex; align-items: center; gap: 6px; font-size: 11.5px;">
+                  <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--accent-emerald);"></span> <span>Normal</span>
+                  <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--accent-amber); margin-left: 6px;"></span> <span>Moderate</span>
+                  <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--accent-rose); margin-left: 6px;"></span> <span>Congested</span>
+                </div>
+              </div>
+            </div>
+            <div style="flex: 1; position: relative;">
+              <div id="leaflet-live-map"></div>
+            </div>
+          </div>
+
+          <!-- Right: Selected Camera Detail Inspector -->
+          <div class="glass-card" style="height: 100%; display: flex; flex-direction: column;">
+            <div class="card-header">
+              <h3>
+                <span class="material-symbols-outlined" style="color: var(--accent-blue);">info</span>
+                <span>Node Telemetry</span>
+              </h3>
+            </div>
+            <div class="card-body camera-inspector" id="camera-inspector-body">
+              <div style="text-align: center; padding: 40px 10px; color: var(--text-muted); font-size: 13px;">
+                <span class="material-symbols-outlined" style="font-size: 40px; color: var(--text-dim); margin-bottom: 10px;">touch_app</span>
+                <div>Click on any camera marker on the map to inspect live density, vehicle count, and average transit speed.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           VIEW 3: TRAJECTORY RECONSTRUCTION
+           ===================================================================== -->
+      <section class="view-container" id="view-trajectory">
+        <!-- Search Bar Top -->
+        <div class="trajectory-search-bar">
+          <div style="display: flex; align-items: center; gap: 14px; flex: 1;">
+            <div style="font-weight: 600; font-size: 14px; color: #fff; display: flex; align-items: center; gap: 6px;">
+              <span class="material-symbols-outlined" style="color: var(--accent-cyan);">route</span>
+              <span>Vehicle Plate:</span>
+            </div>
+            <input type="text" id="traj-plate-input" placeholder="Enter license plate (e.g. MP20AB1234)..." value="MP20AB1234" style="background: rgba(15, 23, 42, 0.9); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 8px 16px; color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 14px; width: 280px; outline: none;" onkeydown="if(event.key==='Enter') executeTrajectorySearch()" />
+            <button class="btn-primary" onclick="executeTrajectorySearch()">
+              <span class="material-symbols-outlined" style="font-size: 18px;">search</span>
+              <span>Reconstruct Journey</span>
+            </button>
+          </div>
+
+          <div class="quick-picks" style="margin-top: 0;">
+            <span style="font-size: 11.5px; color: var(--text-dim); align-self: center;">Samples:</span>
+            <span class="plate-badge" onclick="loadTrajectoryPlate('MP20AB1234')">MP20AB1234</span>
+            <span class="plate-badge" onclick="loadTrajectoryPlate('MP20CB5678')">MP20CB5678</span>
+            <span class="plate-badge" onclick="loadTrajectoryPlate('MP20EF9012')">MP20EF9012</span>
+            <span class="plate-badge" onclick="loadTrajectoryPlate('MP20GH3456')">MP20GH3456</span>
+          </div>
+        </div>
+
+        <div class="trajectory-layout">
+          <!-- Left: Map Reconstruction -->
+          <div class="glass-card" style="height: 100%; display: flex; flex-direction: column;">
+            <div class="card-header">
+              <h3>
+                <span class="material-symbols-outlined" style="color: var(--accent-cyan);">map</span>
+                <span id="traj-map-header">Trajectory Path Reconstruction</span>
+              </h3>
+              <div id="traj-stats-badge" style="font-size: 12px; color: var(--accent-emerald); font-weight: 600;"></div>
+            </div>
+            <div style="flex: 1; position: relative;">
+              <div id="leaflet-trajectory-map"></div>
+            </div>
+          </div>
+
+          <!-- Right: Chronological Timeline Drawer -->
+          <div class="glass-card" style="height: 100%; display: flex; flex-direction: column;">
+            <div class="card-header">
+              <h3>
+                <span class="material-symbols-outlined" style="color: var(--accent-blue);">timeline</span>
+                <span>Chronological Checkpoints</span>
+              </h3>
+            </div>
+            <div class="card-body" style="padding: 16px; flex: 1; overflow-y: auto;">
+              <div class="timeline-feed" id="trajectory-timeline-container">
+                <div style="text-align: center; padding: 40px 10px; color: var(--text-muted); font-size: 13px;">
+                  Enter a license plate or select a sample above to reconstruct its journey.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           VIEW 4: ANPR & VIDEO MONITORING (DUAL CAMERA CCTV STATION)
+           ===================================================================== -->
+      <section class="view-container" id="view-anpr">
+        <!-- Camera Switcher Header -->
+        <div class="camera-switcher-bar">
+          <button class="cam-switch-btn active" id="btn-cam-1" onclick="switchVideoCamera('camera_1')">
+            <span class="material-symbols-outlined" style="color: var(--accent-cyan);">videocam</span>
+            <span>Camera 1 &bull; MG Road Junction (CAM_01)</span>
+          </button>
+          <button class="cam-switch-btn" id="btn-cam-2" onclick="switchVideoCamera('camera_2')">
+            <span class="material-symbols-outlined" style="color: var(--accent-blue);">videocam</span>
+            <span>Camera 2 &bull; Wright Town Circle (CAM_02)</span>
+          </button>
+        </div>
+
+        <div class="anpr-monitoring-layout">
+          <!-- Left: Video Player with Synced Canvas Overlay -->
+          <div class="glass-card" style="display: flex; flex-direction: column;">
+            <div class="card-header">
+              <h3>
+                <span class="material-symbols-outlined" style="color: var(--accent-rose);">center_focus_strong</span>
+                <span id="video-feed-title">Live Video Stream & AI Bounding Box Telemetry</span>
+              </h3>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="conf-pill high" id="anpr-status-pill">DETECTION ACTIVE</span>
+              </div>
+            </div>
+
+            <div class="card-body" style="padding: 16px;">
+              <div class="video-player-container" id="video-container">
+                <video id="demo-video" muted playsinline preload="auto">
+                  <source src="/static/videos/camera_1.mp4" type="video/mp4" />
+                </video>
+                <canvas id="detection-overlay-canvas"></canvas>
+                
+                <div class="video-hud-overlay">
+                  <div class="live-rec-dot"></div>
+                  <span id="hud-cam-name">CAM_01 &bull; 1080P</span>
+                  <span style="color: var(--accent-cyan); margin-left: 6px;" id="hud-time">00:00.0</span>
+                </div>
+              </div>
+
+              <!-- Custom Video Controls -->
+              <div class="video-controls-bar" style="margin-top: 12px; border-radius: var(--radius-md);">
+                <button class="btn-primary" id="btn-video-play" onclick="toggleVideoPlayback()" style="padding: 6px 14px;">
+                  <span class="material-symbols-outlined" id="play-icon" style="font-size: 20px;">play_arrow</span>
+                  <span id="play-text">Play</span>
+                </button>
+                <button class="btn-secondary" onclick="restartVideo()" style="padding: 6px 12px;">
+                  <span class="material-symbols-outlined" style="font-size: 18px;">replay</span>
+                </button>
+                <input type="range" id="video-seek" min="0" max="100" value="0" step="0.1" style="flex: 1; accent-color: var(--accent-cyan); cursor: pointer;" oninput="handleVideoSeek(this.value)" />
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-muted);" id="video-timer">00:00 / 01:00</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Live Plate Detection Stream Log & Manual Validator -->
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <!-- Live OCR Detection Event Stream -->
+            <div class="glass-card">
+              <div class="card-header">
+                <h3>
+                  <span class="material-symbols-outlined" style="color: var(--accent-emerald);">receipt_long</span>
+                  <span>Frame Detection Stream</span>
+                </h3>
+                <span id="active-objects-count" style="font-size: 12px; color: var(--accent-cyan); font-family: 'JetBrains Mono', monospace;">0 Objects</span>
+              </div>
+              <div class="card-body" style="padding: 14px;">
+                <div class="detection-stream-log" id="anpr-stream-log">
+                  <div style="color: var(--text-muted); font-size: 12px; text-align: center; padding: 20px;">
+                    Play the video to observe real-time bounding boxes & OCR license plate detection.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Instant Plate Regex & Positional Validator -->
+            <div class="glass-card">
+              <div class="card-header">
+                <h3>
+                  <span class="material-symbols-outlined" style="color: var(--accent-purple);">spellcheck</span>
+                  <span>License Plate OCR Validator</span>
+                </h3>
+              </div>
+              <div class="card-body">
+                <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 10px;">Test positional OCR correction (e.g. <code>DLOIAB1234</code> &rarr; <code>DL01AB1234</code>).</p>
+                <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                  <input type="text" id="val-plate-input" placeholder="e.g. DLOIAB1234" value="DLOIAB1234" style="flex: 1; background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 8px 12px; color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 13px; outline: none;" />
+                  <button class="btn-primary" onclick="testPlateValidation()">Validate</button>
+                </div>
+                <div id="validation-result-box" style="padding: 10px 12px; background: rgba(15, 23, 42, 0.6); border-radius: var(--radius-sm); font-size: 12px; display: none;">
+                  <!-- Dynamic Validation Result -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           VIEW 5: TRAFFIC ANALYTICS
+           ===================================================================== -->
+      <section class="view-container" id="view-analytics">
+        <div class="analytics-grid">
+          <!-- Active Congestion Radar Card -->
+          <div class="glass-card">
+            <div class="card-header">
+              <h3>
+                <span class="material-symbols-outlined" style="color: var(--accent-rose);">crisis_alert</span>
+                <span>Active Congestion Hotspots</span>
+              </h3>
+              <span style="font-size: 12px; color: var(--text-muted);">Rolling 30-min window &bull; <code>/api/trajectory/congestion</code></span>
+            </div>
+            <div class="card-body" id="analytics-congestion-container">
+              <div style="color: var(--text-muted); font-size: 13px;">Analyzing live congestion...</div>
+            </div>
+          </div>
+
+          <!-- Camera Density Ranking Card -->
+          <div class="glass-card">
+            <div class="card-header">
+              <h3>
+                <span class="material-symbols-outlined" style="color: var(--accent-cyan);">leaderboard</span>
+                <span>Camera Density Leaderboard</span>
+              </h3>
+            </div>
+            <div class="card-body" id="analytics-density-container">
+              <div style="color: var(--text-muted); font-size: 13px;">Loading camera density metrics...</div>
+            </div>
+          </div>
+
+          <!-- Vehicle Classification Distribution -->
+          <div class="glass-card">
+            <div class="card-header">
+              <h3>
+                <span class="material-symbols-outlined" style="color: var(--accent-blue);">pie_chart</span>
+                <span>Vehicle Fleet Composition</span>
+              </h3>
+            </div>
+            <div class="card-body" id="analytics-vehicle-distribution">
+              <div style="display: flex; flex-direction: column; gap: 14px;" id="fleet-composition-bars">
+                <!-- Dynamic fleet bars -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Speed & Flow Telemetry -->
+          <div class="glass-card">
+            <div class="card-header">
+              <h3>
+                <span class="material-symbols-outlined" style="color: var(--accent-emerald);">speed</span>
+                <span>Transit Speed Benchmarks</span>
+              </h3>
+            </div>
+            <div class="card-body" id="analytics-speed-benchmarks">
+              <div style="color: var(--text-muted); font-size: 13px;">Computing average transit speeds...</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           VIEW 6: INVESTIGATION REPORTS
+           ===================================================================== -->
+      <section class="view-container" id="view-reports">
+        <div class="glass-card">
+          <div class="card-header">
+            <h3>
+              <span class="material-symbols-outlined" style="color: var(--accent-cyan);">table_view</span>
+              <span>Vehicle Sightings Audit Ledger & Export</span>
+            </h3>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn-secondary" onclick="exportSightingsCSV()">
+                <span class="material-symbols-outlined" style="font-size: 16px;">download</span>
+                <span>Export CSV</span>
+              </button>
+              <button class="btn-secondary" onclick="window.print()">
+                <span class="material-symbols-outlined" style="font-size: 16px;">print</span>
+                <span>Print Report</span>
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <!-- Filter Bar -->
+            <div style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
+              <input type="text" id="report-filter-plate" placeholder="Filter by plate..." style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 8px 14px; color: #fff; font-size: 13px; outline: none; width: 180px;" oninput="applyReportsFilter()" />
+              <select id="report-filter-camera" style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 8px 14px; color: #fff; font-size: 13px; outline: none;" onchange="applyReportsFilter()">
+                <option value="">All 10 Cameras</option>
+              </select>
+              <select id="report-filter-type" style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 8px 14px; color: #fff; font-size: 13px; outline: none;" onchange="applyReportsFilter()">
+                <option value="">All Vehicle Types</option>
+                <option value="car">Car</option>
+                <option value="motorcycle">Motorcycle / Bike</option>
+                <option value="bus">Bus</option>
+                <option value="truck">Truck</option>
+              </select>
+            </div>
+
+            <div class="modern-table-container">
+              <table class="modern-table">
+                <thead>
+                  <tr>
+                    <th>Record ID</th>
+                    <th>Plate Number</th>
+                    <th>Vehicle Type</th>
+                    <th>Camera Node</th>
+                    <th>Location Name</th>
+                    <th>GPS Coordinates</th>
+                    <th>Timestamp (UTC)</th>
+                    <th>Confidence</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="reports-table-tbody">
+                  <tr><td colspan="9" style="text-align: center; padding: 24px; color: var(--text-muted);">Loading audit ledger...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast-notification">
+    <span class="material-symbols-outlined" style="color: var(--accent-cyan);">info</span>
+    <span id="toast-message">Notification</span>
+  </div>
+
+  <!-- Application Logic -->
+  <script src="/app/app.js"></script>
+  <!-- Fallback local script if served directly -->
+  <script src="app.js"></script>
+</body>
+</html>

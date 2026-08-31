@@ -153,3 +153,50 @@ def validate_plate_endpoint(request: PlateValidationRequest):
         is_valid=is_valid,
         format_type=fmt,
     )
+
+
+@router.get(
+    "/demo-detections/{camera_id}",
+    summary="Get preprocessed frame detection boxes and OCR results for demo video playback",
+)
+def get_demo_detections(camera_id: str):
+    """
+    Returns precomputed frame-by-frame vehicle/plate bounding box and OCR detections
+    for video player synchronization on the frontend.
+    """
+    import json
+    from pathlib import Path
+    from backend.config import BASE_DIR
+
+    # Normalize camera ID (e.g. 'CAM_01' -> 'camera_1', '1' -> 'camera_1')
+    normalized_id = camera_id.lower().replace("-", "_")
+    if normalized_id in ["cam_01", "cam_1", "1", "camera1", "camera_1"]:
+        file_key = "camera_1"
+    elif normalized_id in ["cam_02", "cam_2", "2", "camera2", "camera_2"]:
+        file_key = "camera_2"
+    else:
+        file_key = normalized_id
+
+    search_paths = [
+        BASE_DIR / "test_samples" / "demo_videos" / f"{file_key}_detections.json",
+        BASE_DIR / "backend" / "static" / "demo_detections" / f"{file_key}_detections.json",
+        BASE_DIR / f"{file_key}_detections.json",
+    ]
+
+    for p in search_paths:
+        if p.exists():
+            try:
+                with open(p, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                return data
+            except Exception as e:
+                raise HTTPException(
+                    status_code=500,
+                    detail=f"Error reading detections file for {camera_id}: {str(e)}"
+                )
+
+    raise HTTPException(
+        status_code=404,
+        detail=f"Preprocessed detections for camera '{camera_id}' not found. Please run scripts/preprocess_demo_videos.py first."
+    )
+
